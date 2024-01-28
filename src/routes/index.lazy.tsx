@@ -1,5 +1,6 @@
-import { createLazyFileRoute } from "@tanstack/react-router"
+import { createLazyFileRoute, Link } from "@tanstack/react-router"
 import React from "react"
+import Swap from "../components/Swap"
 
 
 export const Route = createLazyFileRoute('/')({
@@ -8,8 +9,9 @@ export const Route = createLazyFileRoute('/')({
   
   function Index() {
     return (
-      <div className="p-2 bg-red-400">
+      <div className="">
         <h3>Welcome Home!</h3>
+        <Link to="/swaps">Swaps</Link>
       </div>
     )
   }
