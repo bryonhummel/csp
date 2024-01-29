@@ -17,7 +17,7 @@ var swapList = [
         letter: "a"
     },
     shiftInfo: {
-        date: new Date(Date.parse("2024-01-28T00:00:00")),
+        date: new Date,
         team: 4,
         hours: "18:30 - Close",
     }
@@ -36,7 +36,7 @@ var swapList = [
         letter: "b"
     },
     shiftInfo: {
-        date: new Date(Date.parse("2024-01-29T00:00:00")),
+        date: new Date(Date.parse("2024-01-28T00:00:00")),
         team: 4,
         hours: "18:30 - Close",
     }
