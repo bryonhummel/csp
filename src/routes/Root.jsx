@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import TopNav from "./TopNav";
 
 function Root() {
     return (
         <div>
-            <div>Hello Root</div>
-            <Link to={`swaps`}>Swaps</Link>
+            <TopNav />
+            <Outlet />
         </div>
       );
 }
