@@ -3,7 +3,10 @@ import './App.css'
 import React from 'react'
 import Swaps from './routes/Swaps'
 import Root from './routes/Root'
+import Login from './routes/Login'
 import ErrorPage from './routes/Error'
+import { ProtectedRoute } from './routes/ProtectedRoute'
+import {AuthProvider} from './hooks/useAuth';
 
 import {
   createBrowserRouter,
@@ -17,8 +20,15 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "/login",
+        element: <Login />,
+      },
+      {
         path: "/swaps",
-        element: <Swaps />,
+        element:
+          <ProtectedRoute>
+            <Swaps />
+          </ProtectedRoute>,
       },
     ],
   },
@@ -28,7 +38,9 @@ function App() {
 
   return (
     <>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   )
 }

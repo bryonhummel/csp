@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import TopNav from "./TopNav";
+import { AuthProvider } from "../hooks/useAuth";
 
 function Root() {
     return (
         <div>
-            <TopNav />
-            <Outlet />
+            <AuthProvider>
+                <TopNav />
+                <Outlet />
+            </AuthProvider>
         </div>
       );
 }
