@@ -23,7 +23,7 @@ function PatrollerSwap() {
     return(
         <div className='flex-1 rounded-lg shadow'>
             <div className='rounded-t-lg bg-yellow-400'>
-                <div className='uppercase text-black'>to</div>
+                <div className='uppercase text-yellow-600'>to</div>
             </div>
             <div className='border rounded-b-lg flex flex-row items-center border-yellow-300'>
                 <div className='flex-1 flex items-center bg-yellow-300'>
