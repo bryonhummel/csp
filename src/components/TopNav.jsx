@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth';
-import Logo from '../components/logo';
+import Logo from './logo';
 
 function TopNav() {
     const {user, logout} = useAuth()
