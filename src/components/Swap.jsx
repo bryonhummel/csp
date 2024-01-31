@@ -77,7 +77,7 @@ function SwapView({info}) {
     function dateDisplay() {
         if (isToday) {
             return(
-                <div className='uppercase border rounded px-4 py-0.5 bg-green-700 border-green-700 text-white font-bold'>Today</div>
+                <div className='uppercase border rounded px-4  bg-green-700 border-green-700 text-white font-bold text-sm'>Today</div>
             )
         } else {
             return(
