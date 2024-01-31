@@ -1,14 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import TopNav from "./TopNav";
-import { AuthProvider } from "../hooks/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 function Root() {
+    const {user} = useAuth()
+
     return (
         <div>
-            <AuthProvider>
-                <TopNav />
+            <TopNav />
+            <div className="mt-12 pt-2 min-h-dvh">
                 <Outlet />
-            </AuthProvider>
+                {!user && <Navigate to='/login'/>}
+            </div>
         </div>
       );
 }

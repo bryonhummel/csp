@@ -4,6 +4,7 @@ import React from 'react'
 import Swaps from './routes/Swaps'
 import Root from './routes/Root'
 import Login from './routes/Login'
+import Profile from './routes/Profile'
 import ErrorPage from './routes/Error'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import {AuthProvider} from './hooks/useAuth';
@@ -28,6 +29,13 @@ const router = createBrowserRouter([
         element:
           <ProtectedRoute>
             <Swaps />
+          </ProtectedRoute>,
+      },
+      {
+        path: "/profile",
+        element:
+          <ProtectedRoute>
+            <Profile />
           </ProtectedRoute>,
       },
     ],

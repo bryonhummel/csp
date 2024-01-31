@@ -1,16 +1,13 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth';
+import Logo from '../components/logo';
 
 function TopNav() {
     const {user, logout} = useAuth()
 
     return (
-    <div>
-        <Link to={`/`}>Home</Link>
-        { !user && <Link to={`./login`}>Login</Link>}
-        { user && <Link onClick={logout}>Logout</Link>}
-        <Link to={`./swaps`}>Swaps</Link>
-        { user && <span>{user.username}</span>}
+    <div className='bg-red-600 h-12 shadow-md text-white flex flex-grow justify-evenly items-center fixed w-full top-0'>
+        <Link to={'/profile'}><Logo /></Link>
     </div> );
 }
 

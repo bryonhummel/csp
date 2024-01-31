@@ -5,16 +5,16 @@ import Swap from "../components/Swap"
 var swapList = [
 {
     fromPatroller: {
-        firstName: "Bryon",
-        lastName: "Hummel",
-        team: "4",
-        letter: "b"
-    },
-    toPatroller: {
-        firstName: "Mike",
-        lastName: "Sutherland",
+        firstName: "Jane",
+        lastName: "Doe",
         team: "4",
         letter: "a"
+    },
+    toPatroller: {
+        firstName: "Brandon",
+        lastName: "Flowers",
+        team: "4",
+        letter: "b"
     },
     shiftInfo: {
         date: new Date,
@@ -24,14 +24,14 @@ var swapList = [
 },
 {
     fromPatroller: {
-        firstName: "Brigitte",
-        lastName: "DeJong",
+        firstName: "John",
+        lastName: "Smith",
         team: "4",
         letter: "h"
     },
     toPatroller: {
-        firstName: "Bryon",
-        lastName: "Hummel",
+        firstName: "Brandon",
+        lastName: "Flowers",
         team: "4",
         letter: "b"
     },
@@ -43,10 +43,10 @@ var swapList = [
 },
 {
     fromPatroller: {
-        firstName: "Bryon",
-        lastName: "Hummel",
+        firstName: "John",
+        lastName: "Smith",
         team: "4",
-        letter: "b"
+        letter: "h"
     },
     shiftInfo: {
         date: new Date(Date.parse("2024-02-04T00:00:00")),

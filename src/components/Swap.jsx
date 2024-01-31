@@ -8,9 +8,9 @@ function PatrollerNameBadge({patroller, isFrom}) {
                 <div className='uppercase text-gray-500'>{fromToStr}</div>
             </div>
             <div className='border rounded-b-lg flex flex-row items-center'>
-                <div className='flex-1 flex items-center'>
-                    <div className='border-r p-1 uppercase'>{patroller.team}{patroller.letter}</div>
-                    <div className='flex-1 px-4 py-1 font-bold'>
+                <div className='flex-1 flex items-center justify-center'>
+                    <div className='border-r px-2 py-1 uppercase text-gray-500'>{patroller.team}{patroller.letter}</div>
+                    <div className='px-2 py-1 font-bold text-left'>
                         <span>{patroller.firstName}<br/>{patroller.lastName}</span>
                     </div>
                 </div>

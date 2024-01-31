@@ -18,7 +18,7 @@ function Login() {
         }
         login({username: username})
         //await authenticate(username, password); // Assuming you have the authenticate function
-        navigate('/');
+        navigate('/profile');
       } catch {
         setError('Invalid username or password');
       }
