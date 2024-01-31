@@ -9,3 +9,7 @@ Currently, two official plugins are available:
 
 setting up github pages deployment:
 https://medium.com/@aishwaryaparab1/deploying-vite-deploying-vite-app-to-github-pages-166fff40ffd3
+
+
+todo: follow this for auth???
+https://blog.openreplay.com/authentication-in-react-with-supabase/

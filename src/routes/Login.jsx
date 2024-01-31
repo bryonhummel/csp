@@ -25,19 +25,19 @@ function Login() {
     };
 
     return ( 
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={handleSubmit}>
-            <label>
-                Username:
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        <div className='text-center mt-16 w-fit m-auto'>
+            <h1 className='font-bold text-2xl my-4'>Login</h1>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <label className='ml-auto'>
+                Email:
+                <input className='ml-2 h-8 p-2 rounded' type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
             </label>
-            <label>
+            <label className='ml-auto'>
                 Password:
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <input className='ml-2 h-8 p-2 rounded' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
             {error}
-            <input type="submit" value="Login" />
+            <input className='bg-red-600 text-white py-1 rounded' type="submit" value="Submit" />
             </form>
         </div>
      );
