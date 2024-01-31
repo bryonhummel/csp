@@ -7,50 +7,48 @@ import Login from './routes/Login'
 import Profile from './routes/Profile'
 import ErrorPage from './routes/Error'
 import { ProtectedRoute } from './routes/ProtectedRoute'
-import {AuthProvider} from './hooks/useAuth';
+import { AuthProvider } from './hooks/useAuth'
 
-import {
-  createHashRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createHashRouter, RouterProvider } from 'react-router-dom'
 
 const router = createHashRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/swaps",
-        element:
-          <ProtectedRoute>
-            <Swaps />
-          </ProtectedRoute>,
-      },
-      {
-        path: "/profile",
-        element:
-          <ProtectedRoute>
-            <Profile />
-          </ProtectedRoute>,
-      },
-    ],
-  },
-]);
+    {
+        path: '/',
+        element: <Root />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '/login',
+                element: <Login />,
+            },
+            {
+                path: '/swaps',
+                element: (
+                    <ProtectedRoute>
+                        <Swaps />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: '/profile',
+                element: (
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                ),
+            },
+        ],
+    },
+])
 
 function App() {
-
-  return (
-    <>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </>
-  )
+    return (
+        <>
+            <AuthProvider>
+                <RouterProvider router={router} />
+            </AuthProvider>
+        </>
+    )
 }
 
 export default App

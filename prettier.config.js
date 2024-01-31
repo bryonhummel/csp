@@ -6,6 +6,12 @@ const config = {
     tabWidth: 4,
     semi: false,
     singleQuote: true,
+    plugins: ["prettier-plugin-tailwindcss"],
   };
-  
-  export default config;
+
+// prettier.config.js
+module.exports = {
+  tailwindConfig: './tailwind.config.js',
+}
+
+export default config;
