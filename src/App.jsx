@@ -10,11 +10,11 @@ import { ProtectedRoute } from './routes/ProtectedRoute'
 import {AuthProvider} from './hooks/useAuth';
 
 import {
-  createBrowserRouter,
+  createHashRouter,
   RouterProvider,
 } from "react-router-dom";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Root />,
