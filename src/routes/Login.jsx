@@ -36,8 +36,8 @@ function Login() {
                 Password:
                 <input className='ml-2 h-8 p-2 rounded' type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
             </label>
-            {error}
-            <input className='bg-red-600 text-white py-1 rounded' type="submit" value="Submit" />
+            <input className='bg-red-600 text-white py-1 rounded hover:cursor-pointer active:bg-red-400' type="submit" value="Submit" />
+            <span className='text-red-600'>{error}</span>
             </form>
         </div>
      );
