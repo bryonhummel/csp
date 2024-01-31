@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-import TopNav from "./TopNav";
+import TopNav from "../components/TopNav";
 import { useAuth } from "../hooks/useAuth";
 
 function Root() {
