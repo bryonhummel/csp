@@ -6,7 +6,7 @@ function TopNav() {
     const { user, logout } = useAuth()
 
     return (
-        <div className="bg-red-600 h-12 shadow-md text-white flex flex-grow justify-evenly items-center fixed w-full top-0">
+        <div className="fixed top-0 flex h-12 w-full flex-grow items-center justify-evenly bg-red-600 text-white shadow-md">
             <Link to={'/profile'}>
                 <Logo />
             </Link>

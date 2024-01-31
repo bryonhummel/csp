@@ -25,13 +25,13 @@ function Login() {
     }
 
     return (
-        <div className="text-center mt-16 w-fit m-auto">
-            <h1 className="font-bold text-2xl my-4">Login</h1>
+        <div className="m-auto mt-16 w-fit text-center">
+            <h1 className="my-4 text-2xl font-bold">Login</h1>
             <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <label className="ml-auto">
                     Email:
                     <input
-                        className="ml-2 h-8 p-2 rounded"
+                        className="ml-2 h-8 rounded p-2"
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
@@ -40,14 +40,14 @@ function Login() {
                 <label className="ml-auto">
                     Password:
                     <input
-                        className="ml-2 h-8 p-2 rounded"
+                        className="ml-2 h-8 rounded p-2"
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </label>
                 <input
-                    className="bg-red-600 text-white py-1 rounded hover:cursor-pointer active:bg-red-400"
+                    className="rounded bg-red-600 py-1 text-white hover:cursor-pointer active:bg-red-400"
                     type="submit"
                     value="Submit"
                 />

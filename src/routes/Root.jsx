@@ -8,7 +8,7 @@ function Root() {
     return (
         <div>
             <TopNav />
-            <div className="mt-12 pt-2 min-h-dvh">
+            <div className="mt-12 min-h-dvh pt-2">
                 <Outlet />
                 {!user && <Navigate to="/login" />}
             </div>

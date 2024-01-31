@@ -7,13 +7,13 @@ function PatrollerNameBadge({ patroller, isFrom }) {
             <div className="rounded-t-lg bg-gray-200">
                 <div className="uppercase text-gray-500">{fromToStr}</div>
             </div>
-            <div className="border rounded-b-lg flex flex-row items-center">
-                <div className="flex-1 flex items-center justify-center">
+            <div className="flex flex-row items-center rounded-b-lg border">
+                <div className="flex flex-1 items-center justify-center">
                     <div className="border-r px-2 py-1 uppercase text-gray-500">
                         {patroller.team}
                         {patroller.letter}
                     </div>
-                    <div className="px-2 py-1 font-bold text-left">
+                    <div className="px-2 py-1 text-left font-bold">
                         <span>
                             {patroller.firstName}
                             <br />
@@ -32,8 +32,8 @@ function PatrollerSwap() {
             <div className="rounded-t-lg bg-yellow-400">
                 <div className="uppercase text-yellow-600">to</div>
             </div>
-            <div className="border rounded-b-lg flex flex-row items-center border-yellow-300">
-                <div className="flex-1 flex items-center bg-yellow-300">
+            <div className="flex flex-row items-center rounded-b-lg border border-yellow-300">
+                <div className="flex flex-1 items-center bg-yellow-300">
                     <div className="flex-1 px-4 py-1 font-bold">
                         <span className="">
                             Need
@@ -82,7 +82,7 @@ function SwapView({ info }) {
     function dateDisplay() {
         if (isToday) {
             return (
-                <div className="uppercase border rounded px-4  bg-green-700 border-green-700 text-white font-bold text-sm">
+                <div className="rounded border border-green-700 bg-green-700  px-4 text-sm font-bold uppercase text-white">
                     Today
                 </div>
             )
@@ -101,15 +101,15 @@ function SwapView({ info }) {
 
     return (
         <div>
-            <div className="flex flex-row items-center m-4">
+            <div className="m-4 flex flex-row items-center">
                 {dateDisplay()}
                 <div className="flex-1" />
-                <div className="uppercase font-bold ">
+                <div className="font-bold uppercase ">
                     Team {info.shiftInfo.team}
                 </div>
             </div>
             <div>{info.shiftInfo.hours}</div>
-            <div className="flex flex-wrap items-center m-4 justify-center gap-4">
+            <div className="m-4 flex flex-wrap items-center justify-center gap-4">
                 <PatrollerNameBadge
                     patroller={info.fromPatroller}
                     isFrom={true}
@@ -128,7 +128,7 @@ function SwapView({ info }) {
 
 function Swap({ swapInfo }) {
     return (
-        <div className="border bg-white rounded-2xl">
+        <div className="rounded-2xl border bg-white">
             <SwapView info={swapInfo} />
         </div>
     )
