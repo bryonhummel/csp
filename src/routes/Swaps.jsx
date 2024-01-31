@@ -58,8 +58,8 @@ var swapList = [
 
 function Swaps() {
     return (
-        <div className="m-2 text-center">
-        <div className="grid gap-2 md:grid-cols-2">
+        <div className=" text-center max-w-4xl mx-auto my-2">
+        <div className="grid gap-2 md:grid-cols-2 mx-2">
             <Swap swapInfo={swapList[0]} />
             <Swap swapInfo={swapList[1]} />
             <Swap swapInfo={swapList[2]} />
