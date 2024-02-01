@@ -4,24 +4,32 @@ import { useAuth } from '../hooks/useAuth'
 
 function Login() {
     const { login } = useAuth()
-    const [username, setUsername] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState(null)
+    const [errorMsg, setErrorMsg] = useState(null)
     const navigate = useNavigate()
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         try {
-            // Development HACK - lets let anything through :)
-            if (password == '') {
-                throw new Error('Invalid value')
+            setErrorMsg('')
+            setLoading(true)
+            if (!password || !email) {
+                setErrorMsg('Please fill in the fields')
+                return
             }
-            login({ username: username })
-            //await authenticate(username, password); // Assuming you have the authenticate function
-            navigate('/profile')
-        } catch {
-            setError('Invalid username or password')
+            const {
+                data: { user, session },
+                error,
+            } = await login(email, password)
+            if (error) setErrorMsg(error.message)
+            if (user && session) navigate('/profile')
+        } catch (error) {
+            console.log(error)
+            setErrorMsg('Email or Password Incorrect')
         }
+        setLoading(false)
     }
 
     return (
@@ -33,8 +41,8 @@ function Login() {
                     <input
                         className="ml-2 h-8 rounded p-2"
                         type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </label>
                 <label className="ml-auto">
@@ -51,7 +59,7 @@ function Login() {
                     type="submit"
                     value="Submit"
                 />
-                <span className="text-red-600">{error}</span>
+                <span className="text-red-600">{errorMsg}</span>
             </form>
         </div>
     )

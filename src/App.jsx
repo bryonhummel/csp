@@ -7,8 +7,6 @@ import Login from './routes/Login'
 import Profile from './routes/Profile'
 import ErrorPage from './routes/Error'
 import { ProtectedRoute } from './routes/ProtectedRoute'
-import { AuthProvider } from './hooks/useAuth'
-
 import { createHashRouter, RouterProvider } from 'react-router-dom'
 
 const router = createHashRouter([
@@ -44,9 +42,7 @@ const router = createHashRouter([
 function App() {
     return (
         <>
-            <AuthProvider>
-                <RouterProvider router={router} />
-            </AuthProvider>
+            <RouterProvider router={router} />
         </>
     )
 }

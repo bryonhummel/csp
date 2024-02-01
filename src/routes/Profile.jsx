@@ -6,7 +6,7 @@ function Profile() {
 
     return (
         <div>
-            <h1>Hello {user.username}</h1>
+            <h1>Hello {user.email}</h1>
 
             <Link to={'/swaps'}>Swaps</Link>
             <Link onClick={logout}>Logout</Link>
