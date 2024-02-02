@@ -14,7 +14,7 @@ function Root() {
             setTeamList(data)
         }
         fetchData()
-    }, [])
+    }, [user])
 
     return (
         <div>
