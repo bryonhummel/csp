@@ -21,7 +21,6 @@ function Root() {
             <TopNav />
             <div className="mt-12 min-h-dvh pt-2">
                 <Outlet />
-                {teamList}
                 {!user && <Navigate to="/login" />}
             </div>
         </div>

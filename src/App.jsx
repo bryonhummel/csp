@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import React from 'react'
 import Swaps from './routes/Swaps'
+import Roster from './routes/Roster'
 import Root from './routes/Root'
 import Login from './routes/Login'
 import Profile from './routes/Profile'
@@ -32,6 +33,14 @@ const router = createHashRouter([
                 element: (
                     <ProtectedRoute>
                         <Profile />
+                    </ProtectedRoute>
+                ),
+            },
+            {
+                path: '/roster',
+                element: (
+                    <ProtectedRoute>
+                        <Roster />
                     </ProtectedRoute>
                 ),
             },
