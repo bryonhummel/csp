@@ -14,8 +14,5 @@ export async function fetchRoster() {
         return []
     }
 
-    console.log('roster data:')
-    console.log(data)
-
     return data
 }

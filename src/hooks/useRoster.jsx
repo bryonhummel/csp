@@ -72,8 +72,6 @@ export const RosterProvider = ({ children }) => {
         const fetchData = async () => {
             const data = await fetchRoster()
             const parsedData = parseRoster(data)
-            console.log('parsed roster data:')
-            console.log(parsedData)
             setRoster(parsedData)
         }
         fetchData()
