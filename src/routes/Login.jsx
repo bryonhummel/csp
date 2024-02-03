@@ -24,7 +24,7 @@ function Login() {
                 error,
             } = await login(email, password)
             if (error) setErrorMsg(error.message)
-            if (user && session) navigate('/profile')
+            if (user && session) navigate('/members/profile')
         } catch (error) {
             console.log(error)
             setErrorMsg('Email or Password Incorrect')

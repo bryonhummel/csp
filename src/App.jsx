@@ -9,6 +9,7 @@ import Profile from './routes/Profile'
 import ErrorPage from './routes/Error'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
+import { RosterProvider } from './hooks/useRoster'
 
 const router = createHashRouter([
     {
@@ -20,29 +21,30 @@ const router = createHashRouter([
                 path: '/login',
                 element: <Login />,
             },
+        ],
+    },
+    {
+        path: '/members',
+        element: (
+            <ProtectedRoute>
+                <RosterProvider>
+                    <Root />
+                </RosterProvider>
+            </ProtectedRoute>
+        ),
+        errorElement: <ErrorPage />,
+        children: [
             {
-                path: '/swaps',
-                element: (
-                    <ProtectedRoute>
-                        <Swaps />
-                    </ProtectedRoute>
-                ),
+                path: 'swaps',
+                element: <Swaps />,
             },
             {
-                path: '/profile',
-                element: (
-                    <ProtectedRoute>
-                        <Profile />
-                    </ProtectedRoute>
-                ),
+                path: 'profile',
+                element: <Profile />,
             },
             {
-                path: '/roster',
-                element: (
-                    <ProtectedRoute>
-                        <Roster />
-                    </ProtectedRoute>
-                ),
+                path: 'roster',
+                element: <Roster />,
             },
         ],
     },

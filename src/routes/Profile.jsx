@@ -28,8 +28,8 @@ function Profile() {
         <div>
             <h1>Hello {user.email}</h1>
 
-            <PlaceholderNavLink path="roster" />
-            <PlaceholderNavLink path="swaps" />
+            <PlaceholderNavLink path="members/roster" />
+            <PlaceholderNavLink path="members/swaps" />
             <PlaceholderNavLink path="logout" logout={logout} />
         </div>
     )
