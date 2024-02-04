@@ -54,7 +54,7 @@ function ScheduleDayPicker({ onDateChange }) {
     const months = ['Feb', 'Feb', 'Feb', 'Feb', 'Feb', 'Feb', 'Feb']
     // hack... need to figure out how i'm doing this for real
     const dates = [4, 5, 6, 7, 8, 9, 10]
-    const hasEvent = [4, 8, 9]
+    const hasEvent = [4, 8]
 
     return (
         <div className="flex rounded-lg bg-gray-200 shadow">
