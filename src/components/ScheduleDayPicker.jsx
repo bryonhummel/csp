@@ -52,7 +52,7 @@ function ScheduleDayPicker({ onDateChange }) {
     const hasEvent = [4, 8, 9]
 
     return (
-        <div className="flex rounded-lg shadow">
+        <div className="flex rounded-lg bg-gray-200 shadow">
             {DAY_STRING_2CH_MAP.map((day, idx) => {
                 return (
                     <DayButton
