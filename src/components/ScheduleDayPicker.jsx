@@ -23,9 +23,7 @@ function ScheduleDayPicker({ onDateChange }) {
             : ''
         const mStyle = !first && !last ? 'border-t border-b ' : ''
 
-        const activeStyle = active
-            ? 'bg-red-600 text-white '
-            : ' border border-transparent'
+        const activeStyle = active ? 'bg-red-600 text-white ' : ' '
         const scheduledStyle =
             scheduled && !active
                 ? 'border border-gray-400 rounded-md '
