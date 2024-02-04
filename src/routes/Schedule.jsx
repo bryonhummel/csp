@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import ScheduleDayCard from '../components/ScheduleDayCard'
+import ScheduleDayPicker from '../components/ScheduleDayPicker'
 import { useSchedule } from '../hooks/useSchedule'
 
 function Schedule() {
@@ -13,6 +14,7 @@ function Schedule() {
         <div className=" mx-auto my-2 max-w-4xl text-center">
             <div className="mx-2 grid gap-2">
                 <h1 className="text-lg font-bold">Schedule</h1>
+                <ScheduleDayPicker onDateChange={setDisplayDate} />
                 {dayInfo && (
                     <ScheduleDayCard date={displayDate} dayInfo={dayInfo} />
                 )}

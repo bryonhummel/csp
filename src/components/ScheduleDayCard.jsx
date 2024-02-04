@@ -26,8 +26,9 @@ function ShiftBlock({ shift, letter_list, team_number, display_team }) {
 
     return (
         <div className="m-4">
-            <div className="mx-2 my-1 rounded-md border bg-gray-200 px-2 py-0.5">
-                {SHIFT_STRING_MAP[shift]}
+            {/* <div className="mx-2 my-1 rounded-md border bg-gray-200 px-2 py-0.5"> */}
+            <div className="mx-2 my-1 border-b px-2 py-0.5">
+                <span>{SHIFT_STRING_MAP[shift]}</span>
             </div>
             {letter_list.split('').map((letter) => {
                 const rosterEntry = getRosterEntry(roster, team_number, letter)
