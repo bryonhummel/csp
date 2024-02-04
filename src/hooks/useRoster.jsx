@@ -96,3 +96,15 @@ export const RosterProvider = ({ children }) => {
 export const useRoster = () => {
     return useContext(RosterContext)
 }
+
+export function getRosterEntry(roster, team_number, team_letter) {
+    if (roster[team_number] && roster[team_number][team_letter]) {
+        return roster[team_number][team_letter]
+    }
+    return {
+        csp_id: 0,
+        uuid: 0,
+        first_name: 'Unknown',
+        last_name: 'Unknown',
+    }
+}

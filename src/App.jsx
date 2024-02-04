@@ -5,11 +5,13 @@ import Swaps from './routes/Swaps'
 import Roster from './routes/Roster'
 import Root from './routes/Root'
 import Login from './routes/Login'
+import Schedule from './routes/Schedule'
 import Profile from './routes/Profile'
 import ErrorPage from './routes/Error'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
 import { RosterProvider } from './hooks/useRoster'
+import { ScheduleProvider } from './hooks/useSchedule'
 
 const router = createHashRouter([
     {
@@ -28,7 +30,9 @@ const router = createHashRouter([
         element: (
             <ProtectedRoute>
                 <RosterProvider>
-                    <Root />
+                    <ScheduleProvider>
+                        <Root />
+                    </ScheduleProvider>
                 </RosterProvider>
             </ProtectedRoute>
         ),
@@ -37,6 +41,10 @@ const router = createHashRouter([
             {
                 path: 'swaps',
                 element: <Swaps />,
+            },
+            {
+                path: 'schedule',
+                element: <Schedule />,
             },
             {
                 path: 'profile',
