@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { DAY_STRING_2CH_MAP } from '../utils/schedUtils'
+import { DAY_STRING_2CH_MAP, isDateToday } from '../utils/schedUtils'
 
 function ScheduleDayPicker({ onDateChange }) {
     const [selected, setSelected] = useState(0)
@@ -13,6 +13,7 @@ function ScheduleDayPicker({ onDateChange }) {
         active,
         scheduled,
         onClick,
+        isToday,
     }) {
         const fStyle = first
             ? 'rounded-tl-lg rounded-bl-lg border-l border-b border-t '
@@ -29,13 +30,17 @@ function ScheduleDayPicker({ onDateChange }) {
             scheduled && !active
                 ? 'border border-gray-400 rounded-md '
                 : 'border border-transparent '
+        const isTodayStyle = isToday ? 'font-bold ' : ''
         return (
             <div className="flex-1 cursor-pointer" onClick={onClick}>
                 <span className="text-gray-400">{dayStr}</span>
                 <div className={'bg-white ' + fStyle + lStyle + mStyle}>
                     <div
                         className={
-                            'm-1 rounded-md ' + activeStyle + scheduledStyle
+                            'm-1 rounded-md ' +
+                            activeStyle +
+                            scheduledStyle +
+                            isTodayStyle
                         }
                     >
                         {month} <br /> {day}
@@ -71,6 +76,13 @@ function ScheduleDayPicker({ onDateChange }) {
                         last={idx == 6}
                         active={idx == selected}
                         scheduled={hasEvent.includes(dates[idx])}
+                        isToday={isDateToday(
+                            new Date(
+                                '2024-02-' +
+                                    String(dates[idx]).padStart(2, '0') +
+                                    'T00:00:00'
+                            )
+                        )}
                     />
                 )
             })}
