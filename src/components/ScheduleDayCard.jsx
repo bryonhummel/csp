@@ -50,7 +50,6 @@ function ScheduleDayCard({ date, dayInfo }) {
     // determine the 'main' team for this scheduled day by using shift 8-1 or 630-9
     const mainShift = dayInfo['8-1'] || dayInfo['630-9'] || 'unknown'
     const mainTeam = mainShift.team_number
-    date = new Date(Date.parse(date + 'T00:00:00'))
 
     function dateDisplay() {
         const dayStr = DAY_STRING_MAP[date.getDay()]

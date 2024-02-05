@@ -6,17 +6,14 @@ import {
 } from '../utils/schedUtils'
 
 function getLastSunday(d, offset = 0) {
-    //var t = new Date(d)
-    //var t = new Date('2024-02-03T00:00:00')
-    var t = new Date('2024-02-05T00:00:00')
+    var t = new Date(d)
     t.setDate(t.getDate() - t.getDay() + offset)
     return t
 }
 
-function ScheduleDayPicker({ onDateChange }) {
-    const [selected, setSelected] = useState(0)
-
-    const [selectedDate, setSelectedDate] = useState(new Date())
+function ScheduleDayPicker({ onDateChange, selectedDate }) {
+    // index from 0 for the day of the week (starting with sunday==0)
+    const selected = selectedDate.getDay()
 
     function DayButton({
         dayStr,
@@ -81,13 +78,9 @@ function ScheduleDayPicker({ onDateChange }) {
                 return (
                     <DayButton
                         onClick={() => {
-                            // BRYON TODO: kinda hacky state maintenance here... get rid of idx maybe?
-                            setSelected(idx)
                             const selected = new Date(sundayDate)
                             selected.setDate(sundayDate.getDate() + idx)
-                            // hack for date change
-                            setSelectedDate(selected)
-                            onDateChange(selected.toISOString().split('T')[0])
+                            onDateChange(selected)
                         }}
                         key={idx}
                         dayStr={day}
