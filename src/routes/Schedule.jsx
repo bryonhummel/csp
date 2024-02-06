@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import ScheduleDayCard from '../components/ScheduleDayCard'
 import ScheduleDayPicker from '../components/ScheduleDayPicker'
 import { useSchedule } from '../hooks/useSchedule'
@@ -10,7 +11,12 @@ function getTodayFormattedDate(d) {
 
 function Schedule() {
     const { schedule } = useSchedule()
-    const [selectedDate, setSelectedDate] = useState(new Date())
+    let { state } = useLocation()
+    // if we were linked a specific date (from calendar picker) start there...
+    // otherwise load the current date/week
+    const [selectedDate, setSelectedDate] = useState(
+        state ? new Date(Date.parse(state.selectedDate)) : new Date()
+    )
 
     const dayInfo = schedule[getTodayFormattedDate(selectedDate)] || null
 
