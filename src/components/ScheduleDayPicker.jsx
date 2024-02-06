@@ -3,6 +3,7 @@ import {
     MONTH_STRING_MAP,
     isDateToday,
 } from '../utils/schedUtils'
+import TwoToneCard from './TwoToneCard'
 
 function getLastSunday(d, offset = 0) {
     var t = new Date(d)
@@ -13,26 +14,9 @@ function getLastSunday(d, offset = 0) {
 function ScheduleDayPicker({ onDateChange, selectedDate }) {
     // index from 0 for the day of the week (starting with sunday==0)
     const selected = selectedDate.getDay()
+    const sundayDate = getLastSunday(selectedDate)
 
-    function DayButton({
-        dayStr,
-        month,
-        day,
-        first,
-        last,
-        active,
-        scheduled,
-        onClick,
-        isToday,
-    }) {
-        const fStyle = first
-            ? 'rounded-tl-lg rounded-bl-lg border-l border-b border-t '
-            : ''
-        const lStyle = last
-            ? 'rounded-tr-lg rounded-br-lg border-t border-r border-b '
-            : ''
-        const mStyle = !first && !last ? 'border-t border-b ' : ''
-
+    function DayButton({ month, day, active, scheduled, onClick, isToday }) {
         const activeStyle = active ? 'bg-red-600 text-white ' : ' '
         const scheduledStyle =
             scheduled && !active
@@ -41,18 +25,15 @@ function ScheduleDayPicker({ onDateChange, selectedDate }) {
         const isTodayStyle = isToday ? 'font-bold ' : ''
         return (
             <div className="flex-1 cursor-pointer" onClick={onClick}>
-                <span className="text-gray-400">{dayStr}</span>
-                <div className={'bg-white ' + fStyle + lStyle + mStyle}>
-                    <div
-                        className={
-                            'm-1 rounded-md ' +
-                            activeStyle +
-                            scheduledStyle +
-                            isTodayStyle
-                        }
-                    >
-                        {month} <br /> {day}
-                    </div>
+                <div
+                    className={
+                        'm-1 rounded-md ' +
+                        activeStyle +
+                        scheduledStyle +
+                        isTodayStyle
+                    }
+                >
+                    {month} <br /> {day}
                 </div>
             </div>
         )
@@ -61,34 +42,44 @@ function ScheduleDayPicker({ onDateChange, selectedDate }) {
     // weird hack cuz i can't think of abetter way to do this...
     // get last sunday... offset by 1 (last saturday)
     // we will iterate below with a pre-incrememnt so we start the week on sunday
-    const sundayDate = getLastSunday(selectedDate)
     var d = getLastSunday(selectedDate, -1)
 
+    const fillButtons = () => {
+        return DAY_STRING_2CH_MAP.map((_, idx) => {
+            // loop through the week starting at sunday
+            d.setDate(d.getDate() + 1)
+            return (
+                <DayButton
+                    onClick={() => {
+                        const selected = new Date(sundayDate)
+                        selected.setDate(sundayDate.getDate() + idx)
+                        onDateChange(selected)
+                    }}
+                    key={idx}
+                    month={MONTH_STRING_MAP[d.getMonth()]}
+                    day={d.getDate()}
+                    active={idx == selected}
+                    scheduled={idx == 4} // Bryon TODO: need to create helper to know what MY schedule is
+                    isToday={isDateToday(d)}
+                />
+            )
+        })
+    }
+
     return (
-        <div className="flex rounded-lg bg-gray-200 shadow">
-            {DAY_STRING_2CH_MAP.map((day, idx) => {
-                // loop through the week starting at sunday
-                d.setDate(d.getDate() + 1)
+        <TwoToneCard
+            headerContent={DAY_STRING_2CH_MAP.map((day) => {
                 return (
-                    <DayButton
-                        onClick={() => {
-                            const selected = new Date(sundayDate)
-                            selected.setDate(sundayDate.getDate() + idx)
-                            onDateChange(selected)
-                        }}
-                        key={idx}
-                        dayStr={day}
-                        month={MONTH_STRING_MAP[d.getMonth()]}
-                        day={d.getDate()}
-                        first={idx == 0}
-                        last={idx == 6}
-                        active={idx == selected}
-                        scheduled={idx == 4} // Bryon TODO: need to create helper to know what MY schedule is
-                        isToday={isDateToday(d)}
-                    />
+                    <span
+                        key={day}
+                        className="flex-1 justify-between text-gray-400"
+                    >
+                        {day}
+                    </span>
                 )
             })}
-        </div>
+            bodyContent={<div className="flex">{fillButtons()}</div>}
+        />
     )
 }
 

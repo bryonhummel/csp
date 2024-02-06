@@ -19,6 +19,7 @@ function Schedule() {
             <div className="mx-2 grid gap-2">
                 <div className="flex justify-around pb-1 text-lg">
                     <span
+                        className="cursor-pointer"
                         onClick={() => {
                             var d = new Date(selectedDate)
                             d.setDate(d.getDate() - 7)
@@ -28,9 +29,10 @@ function Schedule() {
                         &#60;&#60;
                     </span>
                     <span onClick={() => setSelectedDate(new Date())}>
-                        <h1 className="font-bold">Schedule</h1>
+                        <h1 className="cursor-pointer font-bold">Schedule</h1>
                     </span>
                     <span
+                        className="cursor-pointer"
                         onClick={() => {
                             var d = new Date(selectedDate)
                             d.setDate(d.getDate() + 7)

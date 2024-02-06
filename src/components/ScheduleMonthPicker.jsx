@@ -4,6 +4,7 @@ import {
     MONTH_STRING_MAP,
     isDateToday,
 } from '../utils/schedUtils'
+import TwoToneCard from './TwoToneCard'
 
 function ScheduleMonthPicker({ startDate }) {
     return (
@@ -12,21 +13,19 @@ function ScheduleMonthPicker({ startDate }) {
                 {MONTH_STRING_FULL_MAP[startDate.getMonth()]}{' '}
                 {startDate.getFullYear()}
             </h1>
-            <div className="rounded-lg bg-gray-200 shadow">
-                <div className="flex ">
-                    {DAY_STRING_2CH_MAP.map((day) => {
-                        return (
-                            <span
-                                key={day}
-                                className="flex-1 justify-between text-gray-400"
-                            >
-                                {day}
-                            </span>
-                        )
-                    })}
-                </div>
-                <div className="rounded-lg bg-white">blah</div>
-            </div>
+            <TwoToneCard
+                headerContent={DAY_STRING_2CH_MAP.map((day) => {
+                    return (
+                        <span
+                            key={day}
+                            className="flex-1 justify-between text-gray-400"
+                        >
+                            {day}
+                        </span>
+                    )
+                })}
+                bodyContent={'blah2'}
+            />
         </div>
     )
 }
