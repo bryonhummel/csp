@@ -17,7 +17,29 @@ function Schedule() {
     return (
         <div className=" mx-auto my-2 max-w-4xl text-center">
             <div className="mx-2 grid gap-2">
-                <h1 className="text-lg font-bold">Schedule</h1>
+                <div className="flex justify-around pb-1 text-lg">
+                    <span
+                        onClick={() => {
+                            var d = new Date(selectedDate)
+                            d.setDate(d.getDate() - 7)
+                            setSelectedDate(d)
+                        }}
+                    >
+                        &#60;&#60;
+                    </span>
+                    <span onClick={() => setSelectedDate(new Date())}>
+                        <h1 className="font-bold">Schedule</h1>
+                    </span>
+                    <span
+                        onClick={() => {
+                            var d = new Date(selectedDate)
+                            d.setDate(d.getDate() + 7)
+                            setSelectedDate(d)
+                        }}
+                    >
+                        &#62;&#62;
+                    </span>
+                </div>
                 <ScheduleDayPicker
                     onDateChange={setSelectedDate}
                     selectedDate={selectedDate}
