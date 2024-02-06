@@ -64,17 +64,12 @@ function ScheduleDayPicker({ onDateChange, selectedDate }) {
     // we will iterate below with a pre-incrememnt so we start the week on sunday
     const sundayDate = getLastSunday(selectedDate)
     var d = getLastSunday(selectedDate, -1)
-    var prevMon = null
+
     return (
         <div className="flex rounded-lg bg-gray-200 shadow">
             {DAY_STRING_2CH_MAP.map((day, idx) => {
                 // loop through the week starting at sunday
                 d.setDate(d.getDate() + 1)
-                var displayMonth = ''
-                if (prevMon != d.getMonth() || true) {
-                    prevMon = d.getMonth()
-                    displayMonth = MONTH_STRING_MAP[d.getMonth()]
-                }
                 return (
                     <DayButton
                         onClick={() => {
@@ -84,7 +79,7 @@ function ScheduleDayPicker({ onDateChange, selectedDate }) {
                         }}
                         key={idx}
                         dayStr={day}
-                        month={displayMonth}
+                        month={MONTH_STRING_MAP[d.getMonth()]}
                         day={d.getDate()}
                         first={idx == 0}
                         last={idx == 6}
