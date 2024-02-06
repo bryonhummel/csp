@@ -16,6 +16,21 @@ export const MONTH_STRING_MAP = [
     'Dec',
 ]
 
+export const MONTH_STRING_FULL_MAP = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+]
+
 // priority order of displaying shifts left to right
 export const SHIFT_ORDER_MAP = ['8-1', '10-5', '1-9', '630-9']
 

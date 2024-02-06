@@ -29,6 +29,7 @@ function Profile() {
             <h1>Hello {user.email}</h1>
 
             <PlaceholderNavLink path="members/roster" />
+            <PlaceholderNavLink path="members/calendar" />
             <PlaceholderNavLink path="members/schedule" />
             <PlaceholderNavLink path="members/swaps" />
             <PlaceholderNavLink path="logout" logout={logout} />

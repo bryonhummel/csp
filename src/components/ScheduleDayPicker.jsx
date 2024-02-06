@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
     DAY_STRING_2CH_MAP,
     MONTH_STRING_MAP,

@@ -6,6 +6,7 @@ import Roster from './routes/Roster'
 import Root from './routes/Root'
 import Login from './routes/Login'
 import Schedule from './routes/Schedule'
+import Calendar from './routes/Calendar'
 import Profile from './routes/Profile'
 import ErrorPage from './routes/Error'
 import { ProtectedRoute } from './routes/ProtectedRoute'
@@ -53,6 +54,10 @@ const router = createHashRouter([
             {
                 path: 'roster',
                 element: <Roster />,
+            },
+            {
+                path: 'calendar',
+                element: <Calendar />,
             },
         ],
     },
