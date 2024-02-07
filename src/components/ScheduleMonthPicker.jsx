@@ -8,18 +8,22 @@ import TwoToneCard from './TwoToneCard'
 import { Link } from 'react-router-dom'
 
 function Cell({ isToday, hasEvent, date }) {
-    const todayStyle = isToday ? 'bg-gray-200 font-bold' : ''
+    const todayStyle = isToday
+        ? `text-red-600 font-bold border-red-600`
+        : 'border-gray-600 text-gray-600'
 
-    const eventStyle = hasEvent
-        ? 'border border-gray-400'
-        : 'border border-transparent'
+    const eventStyle = hasEvent ? 'border-b-2 font-bold' : ''
     return (
-        <span
-            className={`m-1 flex-1 rounded-lg py-2 ${todayStyle} ${eventStyle}`}
-        >
+        <span className={`border-red m-1 flex-1 rounded-lg py-2`}>
             {date && (
                 <Link to={'/members/schedule'} state={{ selectedDate: date }}>
-                    {date.getDate()}
+                    <div className="block">
+                        <span
+                            className={`${eventStyle} ${todayStyle} mx-auto block max-w-5`}
+                        >
+                            {date.getDate()}
+                        </span>
+                    </div>
                 </Link>
             )}
         </span>
