@@ -1,4 +1,5 @@
 import ScheduleMonthPicker from '../components/ScheduleMonthPicker'
+import { useSchedule } from '../hooks/useSchedule'
 
 // Dec, Jan, Feb, Mar
 
@@ -15,6 +16,7 @@ function computeActiveSeasonYear() {
 }
 
 function Calendar() {
+    const { myEvents } = useSchedule()
     const activeSeasonYear = computeActiveSeasonYear()
 
     const MONTHS_TO_DISPLAY = [
@@ -24,14 +26,6 @@ function Calendar() {
         new Date(Date.parse(`${activeSeasonYear + 1}-03-01T00:00:00`)),
     ]
 
-    // TODO need to fill this data in from the schedule global state
-    const fake_events_lists = [
-        [24, 28],
-        [4, 6, 11, 14, 18, 27],
-        [1, 6, 8, 11, 15, 24],
-        [7, 10, 14, 21, 23],
-    ]
-
     return (
         <div>
             {MONTHS_TO_DISPLAY.map((date, idx) => {
@@ -39,7 +33,7 @@ function Calendar() {
                     <ScheduleMonthPicker
                         key={date.getMonth()}
                         startDate={date}
-                        eventDaysList={fake_events_lists[idx]}
+                        myEvents={myEvents}
                     />
                 )
             })}

@@ -4,6 +4,7 @@ import {
     isDateToday,
 } from '../utils/schedUtils'
 import TwoToneCard from './TwoToneCard'
+import { useSchedule } from '../hooks/useSchedule'
 
 function getLastSunday(d, offset = 0) {
     var t = new Date(d)
@@ -12,6 +13,7 @@ function getLastSunday(d, offset = 0) {
 }
 
 function ScheduleDayPicker({ onDateChange, selectedDate }) {
+    const { myEvents } = useSchedule()
     // index from 0 for the day of the week (starting with sunday==0)
     const selected = selectedDate.getDay()
     const sundayDate = getLastSunday(selectedDate)
@@ -67,6 +69,7 @@ function ScheduleDayPicker({ onDateChange, selectedDate }) {
         return DAY_STRING_2CH_MAP.map((_, idx) => {
             // loop through the week starting at sunday
             d.setDate(d.getDate() + 1)
+            const scheduled = d.toISOString().split('T')[0] in myEvents
             return (
                 <DayButton
                     onClick={() => {
@@ -78,7 +81,7 @@ function ScheduleDayPicker({ onDateChange, selectedDate }) {
                     month={MONTH_STRING_MAP[d.getMonth()]}
                     day={d.getDate()}
                     active={idx == selected}
-                    scheduled={idx == 4} // Bryon TODO: need to create helper to know what MY schedule is
+                    scheduled={scheduled} // Bryon TODO: need to create helper to know what MY schedule is
                     isToday={isDateToday(d)}
                 />
             )

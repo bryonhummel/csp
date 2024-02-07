@@ -6,6 +6,11 @@ const AuthContext = createContext()
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useLocalStorage('user', null)
     const [auth, setAuth] = useState(false)
+    const [cspUser, setCspUser] = useState({
+        team_number: 0,
+        team_letter: '',
+        cspid: '',
+    })
 
     // call this function when you want to authenticate the user
     const login = async (email, password) =>
@@ -19,9 +24,15 @@ export const AuthProvider = ({ children }) => {
             if (event === 'SIGNED_IN') {
                 setUser(session.user)
                 setAuth(true)
+                setCspUser({
+                    team_number: 4,
+                    team_letter: 'a',
+                    cspid: '12345678901',
+                })
             } else if (event === 'SIGNED_OUT') {
                 setUser(null)
                 setAuth(false)
+                setCspUser(null)
             }
         })
         return () => {
@@ -31,11 +42,12 @@ export const AuthProvider = ({ children }) => {
 
     const value = useMemo(
         () => ({
+            cspUser,
             user,
             login,
             logout,
         }),
-        [user]
+        [user, cspUser]
     )
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

@@ -30,7 +30,7 @@ function Cell({ isToday, hasEvent, date }) {
     )
 }
 
-function Calendar({ startDate, eventDaysList = [] }) {
+function Calendar({ startDate, myEvents = {} }) {
     let dateNum = 1
     let firstDay = new Date(startDate),
         firstWeekDay
@@ -48,7 +48,9 @@ function Calendar({ startDate, eventDaysList = [] }) {
     const todayMonth = today.getMonth()
 
     const hasEvent = (d) => {
-        return eventDaysList.includes(d)
+        let hasEventDate = new Date(startDate)
+        hasEventDate.setDate(d)
+        return hasEventDate.toISOString().split('T')[0] in myEvents
     }
 
     const isToday = (d) => {
@@ -96,7 +98,7 @@ function Calendar({ startDate, eventDaysList = [] }) {
     )
 }
 
-function ScheduleMonthPicker({ startDate, eventDaysList = [] }) {
+function ScheduleMonthPicker({ startDate, myEvents = {} }) {
     return (
         <div className="m-2 mt-6 text-center">
             <h1 className="m-2 text-lg font-bold">
@@ -119,10 +121,7 @@ function ScheduleMonthPicker({ startDate, eventDaysList = [] }) {
                     </div>
                 }
                 bodyContent={
-                    <Calendar
-                        startDate={startDate}
-                        eventDaysList={eventDaysList}
-                    />
+                    <Calendar startDate={startDate} myEvents={myEvents} />
                 }
             />
         </div>

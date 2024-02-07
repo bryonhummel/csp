@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useEffect, useState } from 'react'
 import { fetchFullSchedule } from '../supabase/client'
+import { useAuth } from './useAuth'
 const ScheduleContext = createContext()
 
 function parseSchedule(sqlData) {
@@ -21,13 +22,31 @@ function parseSchedule(sqlData) {
             row.shift
         ] || {
             team_number: row.team_number,
-            letter_list: row.letter_list,
+            letter_list: row.letter_list.toLowerCase(),
         }
     })
     return scheduleData
 }
 
+// returns a list of dates where myTeam+myLetter are scheduled
+function getMyEvents(schedule, myTeam, myLetter) {
+    var myEvents = {}
+
+    Object.entries(schedule).forEach(([date, val]) => {
+        Object.entries(val).forEach(([shift, shiftInfo]) => {
+            if (
+                shiftInfo.team_number == myTeam &&
+                shiftInfo.letter_list.includes(myLetter)
+            ) {
+                myEvents[date] = shift
+            }
+        })
+    })
+    return myEvents
+}
+
 export const ScheduleProvider = ({ children }) => {
+    const { cspUser } = useAuth()
     const [schedule, setSchedule] = useState({})
 
     useEffect(() => {
@@ -45,6 +64,11 @@ export const ScheduleProvider = ({ children }) => {
     const value = useMemo(
         () => ({
             schedule,
+            myEvents: getMyEvents(
+                schedule,
+                cspUser.team_number,
+                cspUser.team_letter
+            ),
         }),
         [schedule]
     )

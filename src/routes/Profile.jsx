@@ -22,12 +22,13 @@ function PlaceholderNavLink({ path, logout }) {
 }
 
 function Profile() {
-    const { user, logout } = useAuth()
+    const { cspUser, user, logout } = useAuth()
 
     return (
         <div>
             <h1>Hello {user.email}</h1>
-
+            <div>team: {cspUser.team_number}</div>
+            <div>letter: {cspUser.team_letter}</div>
             <PlaceholderNavLink path="members/roster" />
             <PlaceholderNavLink path="members/calendar" />
             <PlaceholderNavLink path="members/schedule" />
