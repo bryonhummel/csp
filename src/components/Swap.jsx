@@ -1,38 +1,46 @@
 import React, { useState, useEffect } from 'react'
+import TwoToneCard from './TwoToneCard'
 
 function PatrollerNameBadge({ patroller, isFrom }) {
     const fromToStr = isFrom ? 'From' : 'To'
+
     return (
-        <div className="flex-1 rounded-lg shadow">
-            <div className="rounded-t-lg bg-gray-200">
-                <div className="uppercase text-gray-500">{fromToStr}</div>
-            </div>
-            <div className="flex flex-row items-center rounded-b-lg border">
-                <div className="flex flex-1 items-center justify-center">
-                    <div className="border-r px-2 py-1 uppercase text-gray-500">
-                        {patroller.team}
-                        {patroller.letter}
+        <div className="flex-1">
+            <TwoToneCard
+                headerContent={
+                    <div className="flex-1 capitalize text-gray-400">
+                        {fromToStr}
                     </div>
-                    <div className="px-2 py-1 text-left font-bold">
-                        <span>
-                            {patroller.firstName}
-                            <br />
-                            {patroller.lastName}
-                        </span>
+                }
+                bodyContent={
+                    <div className="flex flex-row items-center rounded-b-lg border">
+                        <div className="flex flex-1 items-center justify-center">
+                            <div className="border-r px-2 py-1 uppercase text-gray-500">
+                                {patroller.team}
+                                {patroller.letter}
+                            </div>
+                            <div className="px-2 py-1 text-left font-bold">
+                                <span>
+                                    {patroller.firstName}
+                                    <br />
+                                    {patroller.lastName}
+                                </span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                }
+            />
         </div>
     )
 }
 
 function PatrollerSwap() {
     return (
-        <div className="flex-1 rounded-lg shadow">
-            <div className="rounded-t-lg bg-yellow-400">
-                <div className="uppercase text-yellow-600">to</div>
+        <div className="flex-1 rounded-lg rounded-t-lg bg-yellow-400 shadow">
+            <div className="">
+                <div className="capitalize text-yellow-600">to</div>
             </div>
-            <div className="flex flex-row items-center rounded-b-lg border border-yellow-300">
+            <div className="flex flex-row items-center rounded-lg border border-yellow-300">
                 <div className="flex flex-1 items-center bg-yellow-300">
                     <div className="flex-1 px-4 py-1 font-bold">
                         <span className="">
