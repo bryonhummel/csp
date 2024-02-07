@@ -6,6 +6,7 @@ import {
     isDateToday,
 } from '../utils/schedUtils'
 import { getRosterEntry, useRoster } from '../hooks/useRoster'
+import { Link } from 'react-router-dom'
 
 function LetterBlock({ team_number, team_letter, first_name, last_name }) {
     return (
@@ -80,7 +81,9 @@ function ScheduleDayCard({ date, dayInfo }) {
             <div className="flex flex-row items-center ">
                 {dateDisplay()}
                 <div className="flex-1" />
-                <div className="font-bold uppercase ">Team {mainTeam}</div>
+                <Link to={'/members/roster'} state={{ expandTeam: mainTeam }}>
+                    <div className="font-bold uppercase ">Team {mainTeam}</div>
+                </Link>
             </div>
             <div>
                 {SHIFT_ORDER_MAP.map((shift) => {

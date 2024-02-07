@@ -143,8 +143,8 @@ let isArray = function (a) {
     return !!a && a.constructor === Array
 }
 
-function TeamCard({ teamNumber, teamDay, memberInfo }) {
-    const [expanded, setExpanded] = useState(false)
+function TeamCard({ teamNumber, teamDay, memberInfo, expand = false }) {
+    const [expanded, setExpanded] = useState(expand)
 
     // override the display of some of the special teams
     if (teamNumber == 'exec') {

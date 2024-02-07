@@ -1,6 +1,7 @@
 import React from 'react'
 import TeamCard from '../components/TeamCard'
 import { useRoster } from '../hooks/useRoster'
+import { useLocation } from 'react-router-dom'
 
 const teamPrintOrder = ['1', '2', '3', '4', '5', '6', 'exec', '0']
 const teamToDayMap = {
@@ -16,6 +17,7 @@ const teamToDayMap = {
 
 function Roster() {
     const { roster } = useRoster()
+    let { state } = useLocation()
     return (
         <div className=" mx-auto my-2 max-w-4xl text-center">
             <div className="mx-2 grid gap-2">
@@ -29,6 +31,7 @@ function Roster() {
                             teamNumber={i}
                             teamDay={teamToDayMap[i]}
                             memberInfo={roster[i]}
+                            expand={state && state.expandTeam == i}
                         />
                     )
                 })}
