@@ -10,21 +10,33 @@ function parseSchedule(sqlData) {
     // TODO: maybe will include swaps later?
     // {
     //   YYYY-MM-DD: {
-    //       8-1:  { team_number: NUM, letter_list: ABC},
-    //       10-5: { team_number: NUM, letter_list: DI},
-    //       1-9:  { team_number: NUM, letter_list: DEFGHI},
+    //       8-1: {
+    //         NUM: {
+    //           letter_list: abc
+    //         }
+    //       }
+    //       10-5: {
+    //         NUM: {
+    //           letter_list: abc
+    //         },
+    //         NUM2: {
+    //           letter_list: abc
+    //         }
+    //       }
     //   }
     // }
 
     sqlData.map((row) => {
         scheduleData[row.date] = scheduleData[row.date] || {}
-        scheduleData[row.date][row.shift] = scheduleData[row.date][
-            row.shift
-        ] || {
-            team_number: row.team_number,
+        scheduleData[row.date][row.shift] =
+            scheduleData[row.date][row.shift] || {}
+        scheduleData[row.date][row.shift][row.team_number] = scheduleData[
+            row.date
+        ][row.shift][row.team_number] || {
             letter_list: row.letter_list.toLowerCase(),
         }
     })
+    console.log(scheduleData)
     return scheduleData
 }
 
@@ -32,14 +44,16 @@ function parseSchedule(sqlData) {
 function getMyEvents(schedule, myTeam, myLetter) {
     var myEvents = {}
 
-    Object.entries(schedule).forEach(([date, val]) => {
-        Object.entries(val).forEach(([shift, shiftInfo]) => {
-            if (
-                shiftInfo.team_number == myTeam &&
-                shiftInfo.letter_list.includes(myLetter)
-            ) {
-                myEvents[date] = shift
-            }
+    Object.entries(schedule).forEach(([dateKey, dateVal]) => {
+        Object.entries(dateVal).forEach(([shiftKey, shiftVal]) => {
+            Object.entries(shiftVal).forEach(([teamKey, teamVal]) => {
+                if (
+                    teamKey == myTeam &&
+                    teamVal.letter_list.includes(myLetter)
+                ) {
+                    myEvents[dateKey] = shiftKey
+                }
+            })
         })
     })
     return myEvents

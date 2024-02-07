@@ -22,25 +22,38 @@ function LetterBlock({ team_number, team_letter, first_name, last_name }) {
     )
 }
 
-function ShiftBlock({ shift, letter_list, team_number, display_team }) {
+function ShiftBlock({ shift, shiftInfo, mainTeam }) {
     const { roster } = useRoster()
-
     return (
         <div className="m-4">
             {/* <div className="mx-2 my-1 rounded-md border bg-gray-200 px-2 py-0.5"> */}
             <div className="mx-2 my-1 border-b px-2 py-0.5">
                 <span>{SHIFT_STRING_MAP[shift]}</span>
             </div>
-            {letter_list.split('').map((letter) => {
-                const rosterEntry = getRosterEntry(roster, team_number, letter)
+            {Object.entries(shiftInfo).map(([team_number, teamInfo]) => {
                 return (
-                    <LetterBlock
-                        key={letter}
-                        team_number={display_team ? team_number : ''}
-                        team_letter={letter}
-                        first_name={rosterEntry.first_name}
-                        last_name={rosterEntry.last_name}
-                    />
+                    <div>
+                        {teamInfo.letter_list.split('').map((letter) => {
+                            const rosterEntry = getRosterEntry(
+                                roster,
+                                team_number,
+                                letter
+                            )
+                            return (
+                                <LetterBlock
+                                    key={letter}
+                                    team_number={
+                                        mainTeam !== team_number
+                                            ? team_number
+                                            : ''
+                                    }
+                                    team_letter={letter}
+                                    first_name={rosterEntry.first_name}
+                                    last_name={rosterEntry.last_name}
+                                />
+                            )
+                        })}
+                    </div>
                 )
             })}
         </div>
@@ -50,7 +63,8 @@ function ShiftBlock({ shift, letter_list, team_number, display_team }) {
 function ScheduleDayCard({ date, dayInfo }) {
     // determine the 'main' team for this scheduled day by using shift 8-1 or 630-9
     const mainShift = dayInfo['8-1'] || dayInfo['630-9'] || 'unknown'
-    const mainTeam = mainShift.team_number
+    // bit of a hack; this assumes only one team (main team) will be scheduled for first shift normally
+    const mainTeam = Object.keys(mainShift)[0]
 
     function dateDisplay() {
         const dayStr = DAY_STRING_MAP[date.getDay()]
@@ -92,11 +106,8 @@ function ScheduleDayCard({ date, dayInfo }) {
                             <ShiftBlock
                                 key={shift}
                                 shift={shift}
-                                team_number={dayInfo[shift].team_number}
-                                letter_list={dayInfo[shift].letter_list}
-                                display_team={
-                                    mainTeam !== dayInfo[shift].team_number
-                                }
+                                shiftInfo={dayInfo[shift]}
+                                mainTeam={mainTeam}
                             />
                         )
                     }
