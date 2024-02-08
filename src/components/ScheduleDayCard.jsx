@@ -61,8 +61,15 @@ function ShiftBlock({ shift, shiftInfo, mainTeam }) {
 }
 
 function ScheduleDayCard({ date, dayInfo }) {
-    // determine the 'main' team for this scheduled day by using shift 8-1 or 630-9
-    const mainShift = dayInfo['8-1'] || dayInfo['630-9'] || 'unknown'
+    // determine the 'main' team for this scheduled day by using the first shift
+    let mainShift = 'unknown'
+    for (let i of SHIFT_ORDER_MAP) {
+        if (dayInfo[i]) {
+            mainShift = dayInfo[i]
+            break
+        }
+    }
+
     // bit of a hack; this assumes only one team (main team) will be scheduled for first shift normally
     const mainTeam = Object.keys(mainShift)[0]
 
