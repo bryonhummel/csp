@@ -25,7 +25,7 @@ function DayButton({ month, day, active, scheduled, onClick, isToday }) {
         textColour = 'text-red-600'
     }
     if (scheduled) {
-        borderStyle = 'border-b-2 border-gray-500'
+        borderStyle = 'border-b-2 border-gray-700'
     }
 
     if (active) {
@@ -43,7 +43,10 @@ function DayButton({ month, day, active, scheduled, onClick, isToday }) {
     const boxStyle = `${bgColour}`
     const textStyle = `${textColour} ${textWeight} ${borderColour} ${borderStyle}`
     return (
-        <div className="block flex-1 cursor-pointer" onClick={onClick}>
+        <div
+            className="block flex-1 cursor-pointer text-gray-700"
+            onClick={onClick}
+        >
             <div className={`mx-1 my-1 rounded ${boxStyle}`}>
                 <div className="m-auto w-fit py-2 leading-5">
                     <div className={`${textStyle} mx-auto`}>
