@@ -32,7 +32,7 @@ function ShiftBlock({ shift, shiftInfo, mainTeam }) {
             </div>
             {Object.entries(shiftInfo).map(([team_number, teamInfo]) => {
                 return (
-                    <div>
+                    <div key={team_number}>
                         {teamInfo.letter_list.split('').map((letter) => {
                             const rosterEntry = getRosterEntry(
                                 roster,

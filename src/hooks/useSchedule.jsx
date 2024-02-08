@@ -36,7 +36,6 @@ function parseSchedule(sqlData) {
             letter_list: row.letter_list.toLowerCase(),
         }
     })
-    console.log(scheduleData)
     return scheduleData
 }
 
