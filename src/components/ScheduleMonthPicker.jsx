@@ -14,7 +14,7 @@ function Cell({ isToday, hasEvent, date }) {
 
     const eventStyle = hasEvent ? 'border-b-2 font-bold' : ''
     return (
-        <span className={`border-red m-1 flex-1 rounded-lg py-2`}>
+        <span className={`border-red m-1 flex-1 rounded-lg py-1`}>
             {date && (
                 <Link to={'/members/schedule'} state={{ selectedDate: date }}>
                     <div className="block">

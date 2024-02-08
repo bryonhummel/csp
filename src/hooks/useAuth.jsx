@@ -24,11 +24,6 @@ export const AuthProvider = ({ children }) => {
             if (event === 'SIGNED_IN') {
                 setUser(session.user)
                 setAuth(true)
-                setCspUser({
-                    team_number: 4,
-                    team_letter: 'a',
-                    cspid: '12345678901',
-                })
             } else if (event === 'SIGNED_OUT') {
                 setUser(null)
                 setAuth(false)
@@ -39,6 +34,22 @@ export const AuthProvider = ({ children }) => {
             data.subscription.unsubscribe()
         }
     }, [])
+
+    useEffect(() => {
+        if (user) {
+            setCspUser({
+                team_number: 4,
+                team_letter: 'a',
+                cspid: '12345678901',
+            })
+        } else {
+            setCspUser({
+                team_number: 0,
+                team_letter: '',
+                cspid: '',
+            })
+        }
+    }, [user])
 
     const value = useMemo(
         () => ({
