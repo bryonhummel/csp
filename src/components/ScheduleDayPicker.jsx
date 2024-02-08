@@ -25,7 +25,7 @@ function DayButton({ month, day, active, scheduled, onClick, isToday }) {
         textColour = 'text-red-600'
     }
     if (scheduled) {
-        borderStyle = 'border-b-2 border-gray-700'
+        borderStyle = 'border-b-2'
     }
 
     if (active) {
@@ -34,6 +34,10 @@ function DayButton({ month, day, active, scheduled, onClick, isToday }) {
     }
     if (active && scheduled) {
         borderColour = 'border-white'
+    } else if (isToday) {
+        borderColour = 'border-red-600'
+    } else if (scheduled) {
+        borderColour = 'border-gray-700'
     }
 
     if (isToday || scheduled) {
