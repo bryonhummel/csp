@@ -4,10 +4,7 @@ import { useLocation } from 'react-router-dom'
 import ScheduleDayCard from '../components/ScheduleDayCard'
 import ScheduleDayPicker from '../components/ScheduleDayPicker'
 import { useSchedule } from '../hooks/useSchedule'
-
-function getTodayFormattedDate(d) {
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
-}
+import { getISOStringLocalTZ } from '../utils/schedUtils'
 
 function Schedule() {
     const { schedule } = useSchedule()
@@ -18,7 +15,7 @@ function Schedule() {
         state ? new Date(Date.parse(state.selectedDate)) : new Date()
     )
 
-    const dayInfo = schedule[getTodayFormattedDate(selectedDate)] || null
+    const dayInfo = schedule[getISOStringLocalTZ(selectedDate)] || null
 
     return (
         <div className=" mx-auto my-2 max-w-4xl text-center">

@@ -3,6 +3,7 @@ import {
     MONTH_STRING_FULL_MAP,
     MONTH_STRING_MAP,
     isDateToday,
+    getISOStringLocalTZ,
 } from '../utils/schedUtils'
 import TwoToneCard from './TwoToneCard'
 import { Link } from 'react-router-dom'
@@ -50,7 +51,7 @@ function Calendar({ startDate, myEvents = {} }) {
     const hasEvent = (d) => {
         let hasEventDate = new Date(startDate)
         hasEventDate.setDate(d)
-        return hasEventDate.toISOString().split('T')[0] in myEvents
+        return getISOStringLocalTZ(hasEventDate) in myEvents
     }
 
     const isToday = (d) => {

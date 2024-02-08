@@ -2,6 +2,7 @@ import {
     DAY_STRING_2CH_MAP,
     MONTH_STRING_MAP,
     isDateToday,
+    getISOStringLocalTZ,
 } from '../utils/schedUtils'
 import TwoToneCard from './TwoToneCard'
 import { useSchedule } from '../hooks/useSchedule'
@@ -12,53 +13,53 @@ function getLastSunday(d, offset = 0) {
     return t
 }
 
+function DayButton({ month, day, active, scheduled, onClick, isToday }) {
+    // TODO: i'm sure there is a better way to manage these styles :(
+    let borderColour = ''
+    let textColour = ''
+    let textWeight = ''
+    let bgColour = ''
+    let borderStyle = 'border-b-2 border-transparent'
+
+    if (isToday) {
+        textColour = 'text-red-600'
+    }
+    if (scheduled) {
+        borderStyle = 'border-b-2 border-gray-500'
+    }
+
+    if (active) {
+        bgColour = 'bg-red-600'
+        textColour = 'text-white'
+    }
+    if (active && scheduled) {
+        borderColour = 'border-white'
+    }
+
+    if (isToday || scheduled) {
+        textWeight = 'font-bold'
+    }
+
+    const boxStyle = `${bgColour}`
+    const textStyle = `${textColour} ${textWeight} ${borderColour} ${borderStyle}`
+    return (
+        <div className="block flex-1 cursor-pointer" onClick={onClick}>
+            <div className={`mx-1 my-1 rounded ${boxStyle}`}>
+                <div className="m-auto w-fit py-2 leading-5">
+                    <div className={`${textStyle} mx-auto`}>
+                        {month} <br /> {day}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 function ScheduleDayPicker({ onDateChange, selectedDate }) {
     const { myEvents } = useSchedule()
     // index from 0 for the day of the week (starting with sunday==0)
     const selected = selectedDate.getDay()
     const sundayDate = getLastSunday(selectedDate)
-
-    function DayButton({ month, day, active, scheduled, onClick, isToday }) {
-        // TODO: i'm sure there is a better way to manage these styles :(
-        let borderColour = ''
-        let textColour = ''
-        let textWeight = ''
-        let bgColour = ''
-        let borderStyle = 'border-b-2 border-transparent'
-
-        if (isToday) {
-            textColour = 'text-red-600'
-        }
-        if (scheduled) {
-            borderStyle = 'border-b-2 border-gray-500'
-        }
-
-        if (active) {
-            bgColour = 'bg-red-600'
-            textColour = 'text-white'
-        }
-        if (active && scheduled) {
-            borderColour = 'border-white'
-        }
-
-        if (isToday || scheduled) {
-            textWeight = 'font-bold'
-        }
-
-        const boxStyle = `${bgColour}`
-        const textStyle = `${textColour} ${textWeight} ${borderColour} ${borderStyle}`
-        return (
-            <div className="block flex-1 cursor-pointer" onClick={onClick}>
-                <div className={`mx-1 my-1 rounded ${boxStyle}`}>
-                    <div className="m-auto w-fit py-2 leading-5">
-                        <div className={`${textStyle} mx-auto`}>
-                            {month} <br /> {day}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
 
     // weird hack cuz i can't think of abetter way to do this...
     // get last sunday... offset by 1 (last saturday)
@@ -69,7 +70,7 @@ function ScheduleDayPicker({ onDateChange, selectedDate }) {
         return DAY_STRING_2CH_MAP.map((_, idx) => {
             // loop through the week starting at sunday
             d.setDate(d.getDate() + 1)
-            const scheduled = d.toISOString().split('T')[0] in myEvents
+            const scheduled = getISOStringLocalTZ(d) in myEvents
             return (
                 <DayButton
                     onClick={() => {

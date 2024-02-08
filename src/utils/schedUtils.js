@@ -63,3 +63,9 @@ export function isDateToday(date) {
         date.getFullYear() == today.getFullYear()
     )
 }
+
+// toISOString() on date doesn't take into account timezone offset... so after a certain time the date jumps
+// ahead of what it is in local timezone.
+export function getISOStringLocalTZ(date) {
+    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`
+}
