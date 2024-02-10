@@ -19,7 +19,10 @@ export async function fetchFullSchedule() {
 
 export async function fetchSwaps() {
     console.log('supabase.client fetchSwaps')
-    const { data, error } = await supabase.from('swaps').select('*')
+    const { data, error } = await supabase
+        .from('swaps')
+        .select('*')
+        .order('date', { ascending: true })
 
     if (error) {
         console.error('Error fetching swaps: ', error)
