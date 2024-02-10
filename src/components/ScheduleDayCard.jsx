@@ -4,29 +4,37 @@ import {
     SHIFT_ORDER_MAP,
     SHIFT_STRING_MAP,
     isDateToday,
+    getISOStringLocalTZ,
 } from '../utils/schedUtils'
 import { getRosterEntry, useRoster } from '../hooks/useRoster'
 import { Link } from 'react-router-dom'
+import { getSwapIfExist } from '../hooks/useSchedule'
 
-function LetterBlock({ team_number, team_letter, first_name, last_name }) {
+function LetterBlock({
+    team_number,
+    team_letter,
+    first_name,
+    last_name,
+    swap,
+}) {
     return (
         <div className="mx-2">
             <span className="text-right uppercase text-gray-400">
                 {team_number || '\u00A0'}
                 {team_letter} |
             </span>
-            <span className="mx-2">
-                <span className="font-semibold">{first_name}</span> {last_name}
+            <span className="ml-2">
+                <span className="font-semibold">{first_name}</span> {last_name}{' '}
             </span>
+            <span className="">{swap && '⇄'}</span>
         </div>
     )
 }
 
-function ShiftBlock({ shift, shiftInfo, mainTeam }) {
+function ShiftBlock({ shift, shiftInfo, mainTeam, date }) {
     const { roster } = useRoster()
     return (
         <div className="m-4">
-            {/* <div className="mx-2 my-1 rounded-md border bg-gray-200 px-2 py-0.5"> */}
             <div className="mx-2 my-1 border-b px-2 py-0.5">
                 <span>{SHIFT_STRING_MAP[shift]}</span>
             </div>
@@ -34,22 +42,32 @@ function ShiftBlock({ shift, shiftInfo, mainTeam }) {
                 return (
                     <div key={team_number}>
                         {teamInfo.letter_list.split('').map((letter) => {
-                            const rosterEntry = getRosterEntry(
-                                roster,
+                            const swapInfo = getSwapIfExist(
+                                date,
+                                shift,
                                 team_number,
                                 letter
+                            )
+                            const swaped_team_number =
+                                swapInfo?.to_team_number || team_number
+                            const swaped_letter = swapInfo?.to_letter || letter
+                            const rosterEntry = getRosterEntry(
+                                roster,
+                                swaped_team_number,
+                                swaped_letter
                             )
                             return (
                                 <LetterBlock
                                     key={letter}
                                     team_number={
-                                        mainTeam !== team_number
-                                            ? team_number
+                                        mainTeam !== swaped_team_number
+                                            ? swaped_team_number
                                             : ''
                                     }
-                                    team_letter={letter}
+                                    team_letter={swaped_letter}
                                     first_name={rosterEntry.first_name}
                                     last_name={rosterEntry.last_name}
+                                    swap={swapInfo != null}
                                 />
                             )
                         })}
@@ -115,6 +133,7 @@ function ScheduleDayCard({ date, dayInfo }) {
                                 shift={shift}
                                 shiftInfo={dayInfo[shift]}
                                 mainTeam={mainTeam}
+                                date={getISOStringLocalTZ(date)}
                             />
                         )
                     }

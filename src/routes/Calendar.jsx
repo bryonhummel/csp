@@ -27,7 +27,7 @@ function Calendar() {
     ]
 
     return (
-        <div>
+        <div className="mx-auto grid max-w-4xl gap-2 md:grid-cols-2">
             {MONTHS_TO_DISPLAY.map((date, idx) => {
                 return (
                     <ScheduleMonthPicker

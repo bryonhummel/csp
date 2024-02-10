@@ -17,6 +17,18 @@ export async function fetchFullSchedule() {
     return data
 }
 
+export async function fetchSwaps() {
+    console.log('supabase.client fetchSwaps')
+    const { data, error } = await supabase.from('swaps').select('*')
+
+    if (error) {
+        console.error('Error fetching swaps: ', error)
+        return []
+    }
+
+    return data
+}
+
 export async function fetchRoster() {
     console.log('supabase.client fetchRoster')
     const { data, error } = await supabase.from('roster').select('*')
