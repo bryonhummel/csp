@@ -13,44 +13,47 @@ function Swaps() {
     Object.entries(swaps).forEach(([dateKey, dateVal]) => {
         Object.entries(dateVal).forEach(([shiftKey, shiftVal]) => {
             Object.entries(shiftVal).forEach(([teamKey, letterObj]) => {
-                const [letter, swap] = Object.entries(letterObj)[0]
-                const key = `${dateKey}${shiftKey}${teamKey}${letter}`
-                // console.log(
-                //     `${dateKey} ${shiftKey} ${teamKey}${letter} -> ${swap.to_team_number}${swap.to_letter}`
-                // )
-                const from = getRosterEntry(roster, teamKey, letter)
+                Object.entries(letterObj).forEach(([letter, swap]) => {
+                    const key = `${dateKey}${shiftKey}${teamKey}${letter}`
+                    // console.log(
+                    //     `${dateKey} ${shiftKey} ${teamKey}${letter} -> ${swap.to_team_number}${swap.to_letter}`
+                    // )
+                    const from = getRosterEntry(roster, teamKey, letter)
 
-                // I hate timezones - this seems to get what i want? not ideal
-                var date = new Date(Date.parse(dateKey))
-                date.setMinutes(date.getMinutes() + date.getTimezoneOffset())
-
-                var swapInfo = {
-                    fromPatroller: {
-                        firstName: from.first_name,
-                        lastName: from.last_name,
-                        team: teamKey,
-                        letter: letter,
-                    },
-                    shiftInfo: {
-                        date: date,
-                        team: teamKey,
-                        hours: SHIFT_STRING_MAP[shiftKey],
-                    },
-                }
-                if (swap.to_team_number && swap.to_letter) {
-                    const to = getRosterEntry(
-                        roster,
-                        swap.to_team_number,
-                        swap.to_letter
+                    // I hate timezones - this seems to get what i want? not ideal
+                    var date = new Date(Date.parse(dateKey))
+                    date.setMinutes(
+                        date.getMinutes() + date.getTimezoneOffset()
                     )
-                    swapInfo['toPatroller'] = {
-                        firstName: to.first_name,
-                        lastName: to.last_name,
-                        team: swap.to_team_number,
-                        letter: swap.to_letter,
+
+                    var swapInfo = {
+                        fromPatroller: {
+                            firstName: from.first_name,
+                            lastName: from.last_name,
+                            team: teamKey,
+                            letter: letter,
+                        },
+                        shiftInfo: {
+                            date: date,
+                            team: teamKey,
+                            hours: SHIFT_STRING_MAP[shiftKey],
+                        },
                     }
-                }
-                swap_list.push(<Swap key={key} swapInfo={swapInfo} />)
+                    if (swap.to_team_number && swap.to_letter) {
+                        const to = getRosterEntry(
+                            roster,
+                            swap.to_team_number,
+                            swap.to_letter
+                        )
+                        swapInfo['toPatroller'] = {
+                            firstName: to.first_name,
+                            lastName: to.last_name,
+                            team: swap.to_team_number,
+                            letter: swap.to_letter,
+                        }
+                    }
+                    swap_list.push(<Swap key={key} swapInfo={swapInfo} />)
+                })
             })
         })
     })
