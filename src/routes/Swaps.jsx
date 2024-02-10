@@ -14,9 +14,10 @@ function Swaps() {
         Object.entries(dateVal).forEach(([shiftKey, shiftVal]) => {
             Object.entries(shiftVal).forEach(([teamKey, letterObj]) => {
                 const [letter, swap] = Object.entries(letterObj)[0]
-                console.log(
-                    `${dateKey} ${shiftKey} ${teamKey}${letter} -> ${swap.to_team_number}${swap.to_letter}`
-                )
+                const key = `${dateKey}${shiftKey}${teamKey}${letter}`
+                // console.log(
+                //     `${dateKey} ${shiftKey} ${teamKey}${letter} -> ${swap.to_team_number}${swap.to_letter}`
+                // )
                 const from = getRosterEntry(roster, teamKey, letter)
 
                 // I hate timezones - this seems to get what i want? not ideal
@@ -49,7 +50,7 @@ function Swaps() {
                         letter: swap.to_letter,
                     }
                 }
-                swap_list.push(<Swap swapInfo={swapInfo} />)
+                swap_list.push(<Swap key={key} swapInfo={swapInfo} />)
             })
         })
     })
