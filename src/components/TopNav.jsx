@@ -4,9 +4,12 @@ import Logo from './logo'
 import Sidebar from './Sidebar'
 import { useState } from 'react'
 
-function HambergerMenuButton() {
+function HambergerMenuButton({ onClick }) {
     return (
-        <div className="stroke-white">
+        <div
+            className="cursor-pointer rounded stroke-white active:bg-red-700"
+            onClick={onClick}
+        >
             <svg
                 width="32px"
                 height="32px"
@@ -49,12 +52,12 @@ function TopNav() {
 
     return (
         <div>
-            <div className="fixed top-0 grid h-14 w-full grid-cols-3 items-center bg-red-600 text-white shadow-md">
-                <div
-                    className="mx-4 "
-                    onClick={() => setShowSidebar(!showSidebar)}
-                >
-                    <HambergerMenuButton />
+            <div className="fixed top-0 z-50 grid h-14 w-full grid-cols-3 items-center bg-red-600 text-white shadow-lg">
+                <div className="mx-4 flex">
+                    <HambergerMenuButton
+                        onClick={() => setShowSidebar(!showSidebar)}
+                    />
+                    <div className="flex-1"></div>
                 </div>
                 <Link to={'/members/profile'}>
                     <Logo />

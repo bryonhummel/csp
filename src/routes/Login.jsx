@@ -40,7 +40,7 @@ function Login() {
             if (rememberMe) {
                 setStoredRememberMe(email)
             }
-            if (user && session) navigate('/members/profile')
+            if (user && session) navigate('/members/schedule')
         } catch (error) {
             console.log(error)
             setErrorMsg('Email or Password Incorrect')
