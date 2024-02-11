@@ -59,7 +59,7 @@ function TopNav() {
                     />
                     <div className="flex-1"></div>
                 </div>
-                <Link to={'/members/profile'}>
+                <Link to={'/members/schedule'}>
                     <Logo />
                 </Link>
             </div>

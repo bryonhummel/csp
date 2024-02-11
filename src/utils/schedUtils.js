@@ -36,8 +36,10 @@ export const MONTH_STRING_FULL_MAP = [
 // priority order of displaying shifts left to right
 export const SHIFT_ORDER_MAP = [
     '8-1',
+    '8-2',
     '8-3',
     '10-5',
+    '10-6',
     '12-6',
     '1-9',
     '2-9',
@@ -47,8 +49,10 @@ export const SHIFT_ORDER_MAP = [
 // use a different string presentation for shift
 export const SHIFT_STRING_MAP = {
     '8-1': '08:00 - 13:00',
+    '8-2': '08:00 - 14:00',
     '8-3': '08:00 - 15:00',
     '10-5': '10:00 - 17:00',
+    '10-6': '10:00 - 18:00',
     '12-6': '12:00 - 18:00',
     '1-9': '13:00 - 21:00',
     '2-9': '14:00 - 21:00',

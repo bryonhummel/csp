@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
         if (user) {
             setCspUser({
                 team_number: 4,
-                team_letter: 'a',
+                team_letter: 'b',
                 cspid: '12345678901',
             })
         } else {
