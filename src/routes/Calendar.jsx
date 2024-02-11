@@ -25,6 +25,8 @@ function Calendar() {
         new Date(Date.parse(`${activeSeasonYear + 1}-02-01T00:00:00`)),
         new Date(Date.parse(`${activeSeasonYear + 1}-03-01T00:00:00`)),
     ]
+    const today = new Date()
+    const todayMonth = today.getMonth()
 
     return (
         <div className="mx-auto grid max-w-4xl gap-2 md:grid-cols-2">
@@ -34,6 +36,7 @@ function Calendar() {
                         key={date.getMonth()}
                         startDate={date}
                         myEvents={myEvents}
+                        autoFocus={todayMonth == date.getMonth()}
                     />
                 )
             })}

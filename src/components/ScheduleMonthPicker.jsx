@@ -1,3 +1,4 @@
+import { useRef, useEffect } from 'react'
 import {
     DAY_STRING_2CH_MAP,
     MONTH_STRING_FULL_MAP,
@@ -99,9 +100,17 @@ function Calendar({ startDate, myEvents = {} }) {
     )
 }
 
-function ScheduleMonthPicker({ startDate, myEvents = {} }) {
+function ScheduleMonthPicker({ startDate, myEvents = {}, autoFocus }) {
+    const inputReference = useRef(null)
+
+    useEffect(() => {
+        if (autoFocus) {
+            inputReference.current.scrollIntoView({ behavior: 'smooth' })
+        }
+    }, [])
+
     return (
-        <div className="m-2 mt-6 text-center">
+        <div className="m-2 mt-6 text-center" ref={inputReference}>
             <h1 className="m-2 text-lg font-bold">
                 {MONTH_STRING_FULL_MAP[startDate.getMonth()]}{' '}
                 {startDate.getFullYear()}
