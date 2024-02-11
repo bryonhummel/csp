@@ -67,7 +67,7 @@ function ShiftBlock({ shift, shiftInfo, mainTeam, date }) {
                                     team_letter={swaped_letter}
                                     first_name={rosterEntry.first_name}
                                     last_name={rosterEntry.last_name}
-                                    swap={swapInfo != null}
+                                    swap={swapInfo?.to_letter != null}
                                 />
                             )
                         })}
