@@ -108,7 +108,7 @@ function Login() {
                     </svg>
                 </div>
                 <input
-                    className="rounded bg-red-600 py-1 text-white hover:cursor-pointer active:bg-red-400"
+                    className="rounded bg-red-600 py-1 text-white hover:cursor-pointer active:bg-red-700"
                     type="submit"
                     value="Submit"
                 />
