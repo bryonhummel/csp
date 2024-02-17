@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { MEMBER_PRINT_ORDER } from '../utils/schedUtils'
 
 function SmsIcon() {
     return (
@@ -119,22 +120,6 @@ function MemberInfo({ info, letter }) {
     )
 }
 
-const memberPrintOrder = [
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-    'g',
-    'h',
-    'i',
-    'j',
-    's', // spare
-    'pl', // used in exec printing only - Patrol Leader
-    'apl', // used in exec printing only - Assistant Patrol Leader
-]
-
 let isObject = function (a) {
     return !!a && a.constructor === Object
 }
@@ -174,7 +159,7 @@ function TeamCard({ teamNumber, teamDay, memberInfo, expand = false }) {
             {expanded && (
                 <ul className="divide-y">
                     {isObject(memberInfo) &&
-                        memberPrintOrder.map((letter) => {
+                        MEMBER_PRINT_ORDER.map((letter) => {
                             if (!memberInfo[letter]) return null
                             return (
                                 <MemberInfo

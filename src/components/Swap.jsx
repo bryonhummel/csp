@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TwoToneCard from './TwoToneCard'
+import { MONTH_STRING_MAP, DAY_STRING_MAP } from '../utils/schedUtils'
 
 function PatrollerNameBadge({ patroller, isFrom }) {
     const fromToStr = isFrom ? 'From' : 'To'
@@ -55,22 +56,6 @@ function PatrollerSwap() {
     )
 }
 
-const dayString = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-const monthString = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-]
-
 function isDateToday(date) {
     const today = new Date()
     return (
@@ -81,8 +66,8 @@ function isDateToday(date) {
 }
 
 function SwapView({ info }) {
-    const dayOfWeek = dayString[info.shiftInfo.date.getDay()]
-    const month = monthString[info.shiftInfo.date.getMonth()]
+    const dayOfWeek = DAY_STRING_MAP[info.shiftInfo.date.getDay()]
+    const month = MONTH_STRING_MAP[info.shiftInfo.date.getMonth()]
     const date = info.shiftInfo.date.getDate()
 
     const isToday = isDateToday(info.shiftInfo.date)
