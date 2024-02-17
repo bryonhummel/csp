@@ -39,10 +39,8 @@ function SwapButton({ date, shift }) {
             to={'/members/swap'}
             state={{ selectedDate: date, selectedShift: shift }}
         >
-            <span className="flex h-8 w-8 cursor-pointer items-center rounded-lg border border-gray-300 text-center uppercase text-gray-400 active:bg-gray-100">
-                <span className="mx-auto my-0 py-0 text-center text-xl">
-                    {SWAP_GLYPH}
-                </span>
+            <span className="flex h-8 w-8 cursor-pointer items-center justify-center rounded-lg border border-gray-200  text-xl text-gray-400 active:bg-gray-100">
+                {SWAP_GLYPH}
             </span>
         </Link>
     )
