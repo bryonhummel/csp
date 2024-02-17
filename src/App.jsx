@@ -5,6 +5,7 @@ import Swaps from './routes/Swaps'
 import Roster from './routes/Roster'
 import Root from './routes/Root'
 import Login from './routes/Login'
+import CreateEditSwap from './routes/CreateEditSwap'
 import Schedule from './routes/Schedule'
 import Calendar from './routes/Calendar'
 import Profile from './routes/Profile'
@@ -42,6 +43,10 @@ const router = createHashRouter([
             {
                 path: 'swaps',
                 element: <Swaps />,
+            },
+            {
+                path: 'swap',
+                element: <CreateEditSwap />,
             },
             {
                 path: 'schedule',

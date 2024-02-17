@@ -8,7 +8,7 @@ import {
 } from '../utils/schedUtils'
 import { getRosterEntry, useRoster } from '../hooks/useRoster'
 import { Link } from 'react-router-dom'
-import { getSwapIfExist } from '../hooks/useSchedule'
+import { getSwapIfExist, useSchedule } from '../hooks/useSchedule'
 
 function LetterBlock({
     team_number,
@@ -33,6 +33,7 @@ function LetterBlock({
 
 function ShiftBlock({ shift, shiftInfo, mainTeam, date }) {
     const { roster } = useRoster()
+    const { swaps } = useSchedule()
     return (
         <div className="m-4">
             <div className="mx-2 my-1 border-b px-2 py-0.5">
@@ -43,6 +44,7 @@ function ShiftBlock({ shift, shiftInfo, mainTeam, date }) {
                     <div key={team_number}>
                         {teamInfo.letter_list.split('').map((letter) => {
                             const swapInfo = getSwapIfExist(
+                                swaps,
                                 date,
                                 shift,
                                 team_number,

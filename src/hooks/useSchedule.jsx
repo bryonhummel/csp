@@ -132,6 +132,7 @@ export const ScheduleProvider = ({ children }) => {
     const { cspUser } = useAuth()
     const [schedule, setSchedule] = useState({})
     const [swaps, setSwaps] = useState({})
+    const [refreshSwapData, setRefreshSwapData] = useState(null)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -155,7 +156,7 @@ export const ScheduleProvider = ({ children }) => {
         return () => {
             setSwaps({})
         }
-    }, [])
+    }, [refreshSwapData])
 
     const value = useMemo(
         () => ({
@@ -167,6 +168,7 @@ export const ScheduleProvider = ({ children }) => {
                 cspUser.team_letter
             ),
             swaps,
+            setRefreshSwapData,
         }),
         [schedule, swaps]
     )
@@ -181,7 +183,6 @@ export const useSchedule = () => {
     return useContext(ScheduleContext)
 }
 
-export function getSwapIfExist(date, shift, team, letter) {
-    const { swaps } = useSchedule()
+export function getSwapIfExist(swaps, date, shift, team, letter) {
     return swaps?.[date]?.[shift]?.[team]?.[letter]
 }

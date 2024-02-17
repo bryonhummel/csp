@@ -59,6 +59,33 @@ export const SHIFT_STRING_MAP = {
     '630-9': '18:30 - 21:00',
 }
 
+export const TEAM_PRINT_ORDER = ['1', '2', '3', '4', '5', '6', 'exec', '0']
+
+export const MEMBER_PRINT_ORDER = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    's', // spare
+    '1', // daytime numbers
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    'pl', // used in exec printing only - Patrol Leader
+    'apl', // used in exec printing only - Assistant Patrol Leader
+]
+
 export function isDateToday(date) {
     const today = new Date()
     return (

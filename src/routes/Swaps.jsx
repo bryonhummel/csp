@@ -4,6 +4,7 @@ import Swap from '../components/Swap'
 import { useSchedule } from '../hooks/useSchedule'
 import { SHIFT_STRING_MAP } from '../utils/schedUtils'
 import { useRoster, getRosterEntry } from '../hooks/useRoster'
+import { Link } from 'react-router-dom'
 
 function FilterToggle({ toggleValue, setToggle }) {
     return (
@@ -87,14 +88,24 @@ function Swaps() {
 
     return (
         <div className=" mx-auto my-2 max-w-4xl text-center">
-            <div className="mx-2 grid gap-2 md:grid-cols-2">
-                <h1 className="text-lg font-bold">Shift Swaps</h1>
-                <FilterToggle
-                    toggleValue={displayAllSwaps}
-                    setToggle={setDisplayAllSwaps}
-                />
-                {swap_list}
+            <h1 className="text-lg font-bold">Shift Swaps</h1>
+            <div className="grid grid-cols-2 items-center">
+                <span className="m-2 text-left">
+                    <Link
+                        to={'/members/swap'}
+                        className="rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
+                    >
+                        New Swap
+                    </Link>
+                </span>
+                <span>
+                    <FilterToggle
+                        toggleValue={displayAllSwaps}
+                        setToggle={setDisplayAllSwaps}
+                    />
+                </span>
             </div>
+            <div className="mx-2 grid gap-2 md:grid-cols-2">{swap_list}</div>
         </div>
     )
 }
