@@ -40,7 +40,7 @@ function SwapForm({
 
     useEffect(() => {
         const options = getShiftOptions(schedule, datePickerValue)
-        setShiftPickerValue(null)
+        setShiftPickerValue(defaultShift)
         setShiftPickerOptions(options)
     }, [datePickerValue, schedule])
 
@@ -50,6 +50,7 @@ function SwapForm({
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log('handleSubmit: ', e)
         try {
             setErrorMsg('')
             setLoading(true)
@@ -144,6 +145,7 @@ function SwapForm({
                     Date:
                     <input
                         className="ml-2"
+                        disabled={defaultDate}
                         type="date"
                         value={datePickerValue}
                         onChange={(e) => {
@@ -160,6 +162,7 @@ function SwapForm({
                             setFromLetterPickerValue(null)
                             setShiftPickerValue(e)
                         }}
+                        disabled={defaultShift}
                         selectedValue={shiftPickerValue}
                         shiftOptions={shiftPickerOptions}
                     />
@@ -184,13 +187,25 @@ function SwapForm({
                     />
                 )}
                 <span className="validity"></span>
-                <button
-                    type="submit"
-                    value="Submit"
-                    className="rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
-                >
-                    Submit
-                </button>
+                <div className="flex gap-2">
+                    <button
+                        value="Cancel"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            navigate(-1)
+                        }}
+                        className="flex-1 rounded border border-red-600 px-2 py-1 hover:cursor-pointer active:bg-red-700 active:text-white"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        value="Submit"
+                        className="flex-1 rounded border-red-600 bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
+                    >
+                        Submit
+                    </button>
+                </div>
                 <button
                     onClick={handleDelete}
                     value="Delete"
