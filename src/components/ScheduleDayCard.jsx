@@ -7,8 +7,10 @@ import {
     getISOStringLocalTZ,
 } from '../utils/schedUtils'
 import { getRosterEntry, useRoster } from '../hooks/useRoster'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { getSwapIfExist, useSchedule } from '../hooks/useSchedule'
+
+const SWAP_GLYPH = '⇄'
 
 function LetterBlock({
     team_number,
@@ -26,8 +28,23 @@ function LetterBlock({
             <span className="ml-2">
                 <span className="font-semibold">{first_name}</span> {last_name}{' '}
             </span>
-            <span className="">{swap && '⇄'}</span>
+            <span className="">{swap && SWAP_GLYPH}</span>
         </div>
+    )
+}
+
+function SwapButton({ date, shift }) {
+    return (
+        <Link
+            to={'/members/swap'}
+            state={{ selectedDate: date, selectedShift: shift }}
+        >
+            <span className="flex h-8 w-8 cursor-pointer items-center rounded-lg border border-gray-300 text-center uppercase text-gray-400 active:bg-gray-100">
+                <span className="mx-auto my-0 py-0 text-center text-xl">
+                    {SWAP_GLYPH}
+                </span>
+            </span>
+        </Link>
     )
 }
 
@@ -36,8 +53,9 @@ function ShiftBlock({ shift, shiftInfo, mainTeam, date }) {
     const { swaps } = useSchedule()
     return (
         <div className="m-4">
-            <div className="mx-2 my-1 border-b px-2 py-0.5">
-                <span>{SHIFT_STRING_MAP[shift]}</span>
+            <div className="my-1 ml-2 flex items-center border-b px-2 pb-2 pt-1.5">
+                <span className="flex-1">{SHIFT_STRING_MAP[shift]}</span>
+                <SwapButton date={date} shift={shift} />
             </div>
             {Object.entries(shiftInfo).map(([team_number, teamInfo]) => {
                 return (

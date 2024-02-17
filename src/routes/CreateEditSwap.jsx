@@ -6,7 +6,7 @@ import RosterPatrollerSelector from '../components/RosterPatrollerSelector'
 import ShiftPatrollerSelector from '../components/ShiftPatrollerSelector'
 import ShiftSelector from '../components/ShiftSelector'
 import { upsertSwap, deleteSwap } from '../supabase/client'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 function SwapForm({
     defaultDate = '',
@@ -26,12 +26,11 @@ function SwapForm({
     const { setRefreshSwapData } = useSchedule()
 
     console.log(
-        `${datePickerValue} ${shiftPickerValue} ${fromLetterPickerValue} ${toLetterPickerValue}`
+        `Swap Form State: ${datePickerValue} ${shiftPickerValue} ${fromLetterPickerValue} ${toLetterPickerValue}`
     )
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log('handleSubmit: ', e)
         try {
             setErrorMsg('')
             setLoading(true)
@@ -63,7 +62,7 @@ function SwapForm({
                     // force a refresh of swap data so we recompute everything
                     setRefreshSwapData(new Date())
 
-                    navigate('/members/swaps')
+                    navigate(-1)
                 })
                 .catch((e) => {
                     console.log('Swap Submit Error', e)
@@ -107,7 +106,7 @@ function SwapForm({
                     // force a refresh of swap data so we recompute everything
                     setRefreshSwapData(new Date())
 
-                    navigate('/members/swaps')
+                    navigate(-1)
                 })
                 .catch((e) => {
                     console.log('Swap Delete Error', e)
@@ -136,6 +135,7 @@ function SwapForm({
                         label="Shift:"
                         date={datePickerValue}
                         onChange={setShiftPickerValue}
+                        selectedValue={shiftPickerValue}
                     />
                 )}
                 {datePickerValue && shiftPickerValue && (
@@ -165,7 +165,7 @@ function SwapForm({
                     value="Delete"
                     className="rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
                 >
-                    Delete
+                    Delete [TODO:Placeholder]
                 </button>
             </form>
             {errorMsg}
@@ -174,14 +174,16 @@ function SwapForm({
 }
 
 function CreateEditSwap() {
-    const { roster } = useRoster()
+    const { state } = useLocation()
 
     return (
         <div className=" mx-auto my-2 max-w-4xl text-center">
             <div className="mx-2 grid gap-2">
                 <h1 className="mb-4 text-lg font-bold">Shift Swap</h1>
-                {/* <SwapForm defaultDate={'2024-02-11'} /> */}
-                <SwapForm />
+                <SwapForm
+                    defaultDate={state?.selectedDate || ''}
+                    defaultShift={state?.selectedShift || null}
+                />
             </div>
         </div>
     )

@@ -26,6 +26,18 @@ function FilterToggle({ toggleValue, setToggle }) {
     )
 }
 
+function NewSwap() {
+    return (
+        <div className="fixed bottom-4 right-4 z-50">
+            <Link to={'/members/swap'}>
+                <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full bg-red-600 pb-0.5 text-4xl text-white active:bg-red-700 md:hover:bg-red-700 ">
+                    <span>+</span>
+                </div>
+            </Link>
+        </div>
+    )
+}
+
 function Swaps() {
     const { swaps } = useSchedule()
     const { roster } = useRoster()
@@ -89,16 +101,9 @@ function Swaps() {
     return (
         <div className=" mx-auto my-2 max-w-4xl text-center">
             <h1 className="text-lg font-bold">Shift Swaps</h1>
-            <div className="grid grid-cols-2 items-center">
-                <span className="m-2 text-left">
-                    <Link
-                        to={'/members/swap'}
-                        className="rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
-                    >
-                        New Swap
-                    </Link>
-                </span>
-                <span>
+            <NewSwap />
+            <div className="my-2 flex flex-row-reverse">
+                <span className="">
                     <FilterToggle
                         toggleValue={displayAllSwaps}
                         setToggle={setDisplayAllSwaps}

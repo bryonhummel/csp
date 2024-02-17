@@ -9,7 +9,10 @@ function ShiftPatrollerSelector({ onChange, label, date, shift }) {
     const shiftInfo = scheduledShifts?.[shift] || {}
 
     const [selected, setSelected] = useState(() => {
-        const [team_number, letter] = Object.entries(shiftInfo)[0] || ['', '']
+        const [team_number, letter] = Object.entries(shiftInfo)[0] || [
+            '',
+            { letter_list: '' },
+        ]
         const selectedValue = `${team_number}${letter.letter_list.split('')[0]}`
         return selectedValue
     })

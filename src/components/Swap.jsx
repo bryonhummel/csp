@@ -42,7 +42,7 @@ function PatrollerSwap() {
                 <div className="capitalize text-yellow-600">to</div>
             </div>
             <div className="flex flex-row items-center rounded-lg border border-yellow-300">
-                <div className="flex flex-1 items-center bg-yellow-300">
+                <div className="flex flex-1 items-center rounded-lg bg-yellow-300">
                     <div className="flex-1 px-4 py-1 font-bold">
                         <span className="">
                             Need

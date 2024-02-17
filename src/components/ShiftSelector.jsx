@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { SHIFT_STRING_MAP } from '../utils/schedUtils'
 import { useSchedule } from '../hooks/useSchedule'
 
-function ShiftSelector({ onChange, label, date }) {
+function ShiftSelector({ onChange, label, date, selectedValue }) {
     const { schedule } = useSchedule()
 
     const scheduledShifts = schedule?.[date] || {}
@@ -11,8 +11,9 @@ function ShiftSelector({ onChange, label, date }) {
     const [selected, setSelected] = useState(() => {
         const scheduledShifts = schedule?.[date] || {}
         const shiftList = Object.keys(scheduledShifts)
-        return shiftList[0]
+        return selectedValue ? selectedValue : shiftList[0]
     })
+    console.log('ShiftSelector selectedValue: ', selectedValue)
 
     useEffect(() => {
         if (!selected) {
@@ -50,28 +51,6 @@ function ShiftSelector({ onChange, label, date }) {
             </select>
         </div>
     )
-
-    // return (
-    //     <div className="flex">
-    //         <label htmlFor="shift-select">Shift:</label>
-
-    //         <select
-    //             id="shift-select"
-    //             className="flex-1"
-    //             onChange={(e) => {
-    //                 setShiftPickerValue(e.target.value)
-    //             }}
-    //         >
-    //             {shiftPickerOptions.map((shift) => {
-    //                 return (
-    //                     <option key={shift} value={shift}>
-    //                         {SHIFT_STRING_MAP[shift]}
-    //                     </option>
-    //                 )
-    //             })}
-    //         </select>
-    //     </div>
-    // )
 }
 
 export default ShiftSelector
