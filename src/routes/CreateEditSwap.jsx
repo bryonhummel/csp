@@ -8,22 +8,42 @@ import ShiftSelector from '../components/ShiftSelector'
 import { upsertSwap, deleteSwap } from '../supabase/client'
 import { useNavigate, useLocation } from 'react-router-dom'
 
+function getShiftOptions(schedule, date) {
+    const scheduledShifts = schedule?.[date] || {}
+    return Object.keys(scheduledShifts)
+}
+
+// From:
+function getFromPatrollerOptions(schedule, date, shift) {
+    let scheduledShifts = schedule?.[date] || {}
+    return scheduledShifts?.[shift] || {}
+}
+
 function SwapForm({
     defaultDate = '',
     defaultShift = null,
     from_team,
     from_letter,
 }) {
-    //const { schedule, swaps } = useSchedule()
+    const { schedule } = useSchedule()
     const [datePickerValue, setDatePickerValue] = useState(defaultDate)
     const [shiftPickerValue, setShiftPickerValue] = useState(defaultShift)
     const [fromLetterPickerValue, setFromLetterPickerValue] = useState(null)
     const [toLetterPickerValue, setToLetterPickerValue] = useState(null)
 
+    const [shiftPickerOptions, setShiftPickerOptions] = useState([])
+
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const [errorMsg, setErrorMsg] = useState(null)
     const { setRefreshSwapData } = useSchedule()
+
+    useEffect(() => {
+        const options = getShiftOptions(schedule, datePickerValue)
+        console.log('SwapForm set shiftPickerOptions ', options)
+        setShiftPickerValue(null)
+        setShiftPickerOptions(options)
+    }, [datePickerValue, schedule])
 
     console.log(
         `Swap Form State: ${datePickerValue} ${shiftPickerValue} ${fromLetterPickerValue} ${toLetterPickerValue}`
@@ -127,15 +147,22 @@ function SwapForm({
                         className="ml-2"
                         type="date"
                         value={datePickerValue}
-                        onChange={(e) => setDatePickerValue(e.target.value)}
+                        onChange={(e) => {
+                            setShiftPickerValue(null)
+                            setFromLetterPickerValue(null)
+                            setDatePickerValue(e.target.value)
+                        }}
                     />
                 </label>
                 {datePickerValue && (
                     <ShiftSelector
                         label="Shift:"
-                        date={datePickerValue}
-                        onChange={setShiftPickerValue}
+                        onChange={(e) => {
+                            setFromLetterPickerValue(null)
+                            setShiftPickerValue(e)
+                        }}
                         selectedValue={shiftPickerValue}
+                        shiftOptions={shiftPickerOptions}
                     />
                 )}
                 {datePickerValue && shiftPickerValue && (
@@ -143,7 +170,12 @@ function SwapForm({
                         label="From:"
                         onChange={setFromLetterPickerValue}
                         date={datePickerValue}
-                        shift={shiftPickerValue}
+                        selectedValue={fromLetterPickerValue}
+                        patrollerOptions={getFromPatrollerOptions(
+                            schedule,
+                            datePickerValue,
+                            shiftPickerValue
+                        )}
                     />
                 )}
                 {datePickerValue && shiftPickerValue && (
