@@ -40,7 +40,6 @@ function SwapForm({
 
     useEffect(() => {
         const options = getShiftOptions(schedule, datePickerValue)
-        console.log('SwapForm set shiftPickerOptions ', options)
         setShiftPickerValue(null)
         setShiftPickerOptions(options)
     }, [datePickerValue, schedule])

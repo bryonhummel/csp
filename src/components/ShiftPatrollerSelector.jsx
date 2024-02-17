@@ -10,7 +10,19 @@ function ShiftPatrollerSelector({
 }) {
     const { roster } = useRoster()
 
-    console.log('ShiftPatrollerSelector selected: ', selectedValue)
+    // if we don't have a selected value, take the first
+    // one in the list
+    useEffect(() => {
+        const [team, letters] = Object.entries(patrollerOptions)[0] || [
+            null,
+            { letter_list: '' },
+        ]
+
+        const first_letter = letters?.letter_list.split('')[0]
+        if (!selectedValue && first_letter) {
+            onChange(`${team}${first_letter}`)
+        }
+    }, [selectedValue, patrollerOptions])
 
     var options = []
 
