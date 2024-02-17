@@ -71,7 +71,7 @@ function Swaps() {
                         shiftInfo: {
                             date: date,
                             team: teamKey,
-                            hours: SHIFT_STRING_MAP[shiftKey],
+                            shift: shiftKey,
                         },
                     }
                     if (swap.to_team_number && swap.to_letter) {

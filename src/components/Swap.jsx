@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import TwoToneCard from './TwoToneCard'
-import { MONTH_STRING_MAP, DAY_STRING_MAP } from '../utils/schedUtils'
+import {
+    MONTH_STRING_MAP,
+    DAY_STRING_MAP,
+    SHIFT_STRING_MAP,
+    getISOStringLocalTZ,
+} from '../utils/schedUtils'
+import { Link } from 'react-router-dom'
 
 function PatrollerNameBadge({ patroller, isFrom }) {
     const fromToStr = isFrom ? 'From' : 'To'
@@ -37,7 +43,7 @@ function PatrollerNameBadge({ patroller, isFrom }) {
 
 function PatrollerSwap() {
     return (
-        <div className="flex-1 rounded-lg rounded-t-lg bg-yellow-400 shadow">
+        <div className="rounded-lg rounded-t-lg bg-yellow-400 shadow">
             <div className="">
                 <div className="capitalize text-yellow-600">to</div>
             </div>
@@ -101,7 +107,7 @@ function SwapView({ info }) {
                     Team {info.shiftInfo.team}
                 </div>
             </div>
-            <div>{info.shiftInfo.hours}</div>
+            <div>{SHIFT_STRING_MAP[info.shiftInfo.shift]}</div>
             <div className="m-4 flex flex-wrap items-center justify-center gap-4">
                 <PatrollerNameBadge
                     patroller={info.fromPatroller}
@@ -113,7 +119,20 @@ function SwapView({ info }) {
                         isFrom={false}
                     />
                 )}
-                {!info.toPatroller && <PatrollerSwap />}
+                {!info.toPatroller && (
+                    <Link
+                        className="flex-1 "
+                        to={'/members/swap'}
+                        state={{
+                            selectedDate: getISOStringLocalTZ(
+                                info.shiftInfo.date
+                            ),
+                            selectedShift: info.shiftInfo.shift,
+                        }}
+                    >
+                        <PatrollerSwap />
+                    </Link>
+                )}
             </div>
         </div>
     )

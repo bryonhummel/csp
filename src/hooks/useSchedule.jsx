@@ -91,39 +91,44 @@ function getMyEvents(schedule, swaps, myTeam, myLetter) {
     // now go manipulate all the swap data from my events
     // - remove events where there is a "from" swap defined with a "to" available
     // - add events where a "to" swap is defined
-
+    console.log('parse myEvents: ', myTeam, myLetter)
+    console.log('parse swaps: ', swaps)
     Object.entries(swaps).forEach(([dateKey, dateVal]) => {
         Object.entries(dateVal).forEach(([shiftKey, shiftVal]) => {
             Object.entries(shiftVal).forEach(([teamKey, letterObj]) => {
-                const [letter, swap] = Object.entries(letterObj)[0]
-                // found a FROM entry for me
-                if (
-                    teamKey == myTeam &&
-                    letter == myLetter &&
-                    swap.to_team_number != myTeam &&
-                    swap.to_letter != myLetter &&
-                    swap.to_team_number != null &&
-                    swap.to_letter != null
-                ) {
-                    // console.log(
-                    //     `REMOVE SWAP FOUND: from ${myTeam}${myLetter} to ${swap.to_team_number}${swap.to_letter}`
-                    // )
-                    delete myEvents[dateKey]
-                }
+                Object.entries(letterObj).forEach(([letter, swap]) => {
+                    // found a FROM entry for me
+                    if (
+                        teamKey == myTeam &&
+                        letter == myLetter &&
+                        swap.to_team_number != myTeam &&
+                        swap.to_letter != myLetter &&
+                        swap.to_team_number != null &&
+                        swap.to_letter != null
+                    ) {
+                        // console.log(
+                        //     `REMOVE SWAP FOUND: from ${myTeam}${myLetter} to ${swap.to_team_number}${swap.to_letter}`
+                        // )
+                        delete myEvents[dateKey]
+                    }
 
-                // found a TO entry for me
-                if (
-                    swap.to_team_number == myTeam &&
-                    swap.to_letter == myLetter
-                ) {
-                    // console.log(
-                    //     `ADD SWAP FOUND: from ${teamKey}${letter} to ${swap.to_team_number}${swap.to_letter}`
-                    // )
-                    myEvents[dateKey] = shiftKey
-                }
+                    console.log('swap data: ', swap)
+                    // found a TO entry for me
+                    if (
+                        swap.to_team_number == myTeam &&
+                        swap.to_letter == myLetter
+                    ) {
+                        // console.log(
+                        //     `ADD SWAP FOUND: from ${teamKey}${letter} to ${swap.to_team_number}${swap.to_letter}`
+                        // )
+                        myEvents[dateKey] = shiftKey
+                    }
+                })
             })
         })
     })
+
+    console.log('myEvents: ', myEvents)
 
     return myEvents
 }
@@ -150,6 +155,7 @@ export const ScheduleProvider = ({ children }) => {
         const fetchData = async () => {
             const data = await fetchSwaps()
             const parsedData = parseSwaps(data)
+            console.log('parsed swaps: ', parsedData)
             setSwaps(parsedData)
         }
         fetchData()
