@@ -181,7 +181,9 @@ function SwapForm({
                                 <input
                                     disabled={defaultDate}
                                     type="date"
+                                    className="rounded-lg bg-gray-200 p-1 px-2 text-black disabled:bg-white disabled:font-bold disabled:text-black disabled:opacity-100"
                                     value={datePickerValue}
+                                    placeholder={'yyyy-mm-dd'}
                                     onChange={(e) => {
                                         setShiftPickerValue(null)
                                         setFromLetterPickerValue(null)

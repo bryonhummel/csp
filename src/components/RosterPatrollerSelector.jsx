@@ -33,7 +33,7 @@ function RosterPatrollerSelector({
         <div className="flex">
             <select
                 id="to-select"
-                className="flex-1"
+                className="flex-1 appearance-none rounded-lg bg-gray-200 p-1 px-2 text-black disabled:bg-white disabled:font-bold disabled:opacity-100"
                 value={selectedValue == null ? '' : selectedValue}
                 onChange={(e) => {
                     onChange(e.target.value == '' ? null : e.target.value)

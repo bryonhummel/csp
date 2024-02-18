@@ -25,7 +25,7 @@ function ShiftSelector({ onChange, selectedValue, shiftOptions, disabled }) {
         <div className="flex">
             <select
                 id="shift-select"
-                className="flex-1"
+                className="flex-1 appearance-none rounded-lg bg-gray-200 p-1 px-2 text-black disabled:bg-white disabled:font-bold disabled:opacity-100"
                 disabled={disabled}
                 value={selectedValue ? selectedValue : ''}
                 onChange={(e) => {
