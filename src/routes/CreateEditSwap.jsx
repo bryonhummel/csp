@@ -169,56 +169,84 @@ function SwapForm({
     }
 
     return (
-        <div>
-            <form className="flex flex-col gap-2" onSubmit={handleSubmit}>
-                <label>
-                    Date:
-                    <input
-                        className="ml-2"
-                        disabled={defaultDate}
-                        type="date"
-                        value={datePickerValue}
-                        onChange={(e) => {
-                            setShiftPickerValue(null)
-                            setFromLetterPickerValue(null)
-                            setDatePickerValue(e.target.value)
-                        }}
-                    />
-                </label>
-                {datePickerValue && (
-                    <ShiftSelector
-                        label="Shift:"
-                        onChange={(e) => {
-                            setFromLetterPickerValue(null)
-                            setShiftPickerValue(e)
-                        }}
-                        disabled={defaultShift}
-                        selectedValue={shiftPickerValue}
-                        shiftOptions={shiftPickerOptions}
-                    />
-                )}
-                {datePickerValue && shiftPickerValue && (
-                    <ShiftPatrollerSelector
-                        label="From:"
-                        onChange={setFromLetterPickerValue}
-                        date={datePickerValue}
-                        selectedValue={fromLetterPickerValue}
-                        patrollerOptions={getFromPatrollerOptions(
-                            schedule,
-                            datePickerValue,
-                            shiftPickerValue
+        <div className="rounded-lg border bg-white p-4 shadow">
+            <form className="" onSubmit={handleSubmit}>
+                <table className="mx-auto mb-8 border-separate border-spacing-4 text-left">
+                    <tbody>
+                        <tr className="">
+                            <td className="text-right">
+                                <label>Date:</label>
+                            </td>
+                            <td className="block ">
+                                <input
+                                    disabled={defaultDate}
+                                    type="date"
+                                    value={datePickerValue}
+                                    onChange={(e) => {
+                                        setShiftPickerValue(null)
+                                        setFromLetterPickerValue(null)
+                                        setDatePickerValue(e.target.value)
+                                    }}
+                                />
+                            </td>
+                        </tr>
+                        {datePickerValue && (
+                            <tr>
+                                <td className="text-right">
+                                    <label>Shift:</label>
+                                </td>
+
+                                <td>
+                                    <ShiftSelector
+                                        onChange={(e) => {
+                                            setFromLetterPickerValue(null)
+                                            setShiftPickerValue(e)
+                                        }}
+                                        disabled={defaultShift}
+                                        selectedValue={shiftPickerValue}
+                                        shiftOptions={shiftPickerOptions}
+                                    />
+                                </td>
+                            </tr>
                         )}
-                        disabled={defaultFromTeamAndLetter}
-                    />
-                )}
-                {datePickerValue && shiftPickerValue && (
-                    <RosterPatrollerSelector
-                        label="To:"
-                        onChange={setToLetterPickerValue}
-                        patrollerOptions={getToPatrollerOptions(roster)}
-                        selectedValue={toLetterPickerValue}
-                    />
-                )}
+                        {datePickerValue && shiftPickerValue && (
+                            <tr>
+                                <td className="text-right">
+                                    <label>From:</label>
+                                </td>
+                                <td>
+                                    <ShiftPatrollerSelector
+                                        onChange={setFromLetterPickerValue}
+                                        date={datePickerValue}
+                                        selectedValue={fromLetterPickerValue}
+                                        patrollerOptions={getFromPatrollerOptions(
+                                            schedule,
+                                            datePickerValue,
+                                            shiftPickerValue
+                                        )}
+                                        disabled={defaultFromTeamAndLetter}
+                                    />
+                                </td>
+                            </tr>
+                        )}
+                        {datePickerValue && shiftPickerValue && (
+                            <tr>
+                                <td className="text-right">
+                                    <label>To:</label>
+                                </td>
+                                <td>
+                                    <RosterPatrollerSelector
+                                        onChange={setToLetterPickerValue}
+                                        patrollerOptions={getToPatrollerOptions(
+                                            roster
+                                        )}
+                                        selectedValue={toLetterPickerValue}
+                                    />
+                                </td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
                 <span className="validity"></span>
                 <div className="flex gap-2">
                     <button
@@ -244,13 +272,15 @@ function SwapForm({
                     defaultDate != '' &&
                         defaultShift &&
                         defaultFromTeamAndLetter && (
-                            <button
-                                onClick={handleDelete}
-                                value="Delete"
-                                className="rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
-                            >
-                                Delete
-                            </button>
+                            <div className="mt-4">
+                                <button
+                                    onClick={handleDelete}
+                                    value="Delete"
+                                    className="w-full rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         )
                 }
             </form>

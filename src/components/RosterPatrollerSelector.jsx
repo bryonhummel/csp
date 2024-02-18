@@ -4,7 +4,6 @@ import { TEAM_PRINT_ORDER, MEMBER_PRINT_ORDER } from '../utils/schedUtils'
 
 function RosterPatrollerSelector({
     onChange,
-    label,
     patrollerOptions,
     selectedValue,
 }) {
@@ -32,8 +31,6 @@ function RosterPatrollerSelector({
 
     return (
         <div className="flex">
-            <label htmlFor="to-select">{label}</label>
-
             <select
                 id="to-select"
                 className="flex-1"

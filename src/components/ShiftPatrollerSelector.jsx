@@ -4,7 +4,6 @@ import { useSchedule } from '../hooks/useSchedule'
 
 function ShiftPatrollerSelector({
     onChange,
-    label,
     selectedValue,
     patrollerOptions,
     disabled,
@@ -46,8 +45,6 @@ function ShiftPatrollerSelector({
 
     return (
         <div className="flex">
-            <label htmlFor="to-select">{label}</label>
-
             <select
                 id="to-select"
                 className="flex-1"

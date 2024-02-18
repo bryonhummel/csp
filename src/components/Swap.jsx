@@ -116,7 +116,12 @@ function SwapView({ info }) {
                 {dateDisplay()}
                 <div className="flex-1" />
                 <div className="font-bold uppercase ">
-                    Team {info.shiftInfo.team}
+                    <Link
+                        to={'/members/roster'}
+                        state={{ expandTeam: info.shiftInfo.team }}
+                    >
+                        Team {info.shiftInfo.team}
+                    </Link>
                 </div>
             </div>
             <div>{SHIFT_STRING_MAP[info.shiftInfo.shift]}</div>

@@ -2,13 +2,7 @@ import { useState, useEffect } from 'react'
 import { SHIFT_STRING_MAP } from '../utils/schedUtils'
 import { useSchedule } from '../hooks/useSchedule'
 
-function ShiftSelector({
-    onChange,
-    label,
-    selectedValue,
-    shiftOptions,
-    disabled,
-}) {
+function ShiftSelector({ onChange, selectedValue, shiftOptions, disabled }) {
     var options = []
 
     shiftOptions.map((shift) => {
@@ -29,8 +23,6 @@ function ShiftSelector({
 
     return (
         <div className="flex">
-            <label htmlFor="shift-select">{label}</label>
-
             <select
                 id="shift-select"
                 className="flex-1"

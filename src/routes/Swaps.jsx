@@ -28,9 +28,9 @@ function FilterToggle({ toggleValue, setToggle }) {
 
 function NewSwap() {
     return (
-        <div className="fixed bottom-4 right-4 z-50">
+        <div className="fixed right-4 top-2 z-50">
             <Link to={'/members/swap'}>
-                <div className="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full border-4 border-white bg-red-600 pb-0.5 text-4xl text-white active:bg-red-700 md:hover:bg-red-700">
+                <div className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-lg bg-red-600 pb-0.5 text-4xl text-white active:bg-red-700 md:hover:bg-red-700">
                     <span>+</span>
                 </div>
             </Link>
