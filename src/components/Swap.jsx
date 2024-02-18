@@ -12,15 +12,15 @@ function PatrollerNameBadge({ patroller, isFrom }) {
     const fromToStr = isFrom ? 'From' : 'To'
 
     return (
-        <div className="flex-1">
+        <div className="flex-1 ">
             <TwoToneCard
                 headerContent={
-                    <div className="flex-1 capitalize text-gray-400">
+                    <div className="flex-1 rounded-t-lg capitalize text-gray-400">
                         {fromToStr}
                     </div>
                 }
                 bodyContent={
-                    <div className="flex flex-row items-center rounded-b-lg border">
+                    <div className="flex flex-row items-center rounded-lg border-2 border-gray-200">
                         <div className="flex flex-1 items-center justify-center">
                             <div className="border-r px-2 py-1 uppercase text-gray-500">
                                 {patroller.team}
@@ -43,11 +43,11 @@ function PatrollerNameBadge({ patroller, isFrom }) {
 
 function PatrollerSwap() {
     return (
-        <div className="rounded-lg rounded-t-lg border border-red-600 bg-red-600 shadow">
+        <div className="rounded-lg border-2 border-red-600 bg-red-600 shadow">
             <div className="">
                 <div className="capitalize text-white">to</div>
             </div>
-            <div className="flex flex-row items-center rounded-lg border border-red-600">
+            <div className="flex flex-row items-center rounded-lg border-red-600">
                 <div className="flex flex-1 items-center rounded-md bg-white">
                     <div className="flex-1 px-4 py-1 font-bold">
                         <span className="">
@@ -132,7 +132,7 @@ function SwapView({ info }) {
                 />
                 {info.toPatroller && (
                     <Link
-                        className="flex-1 "
+                        className="flex-1 border-gray-200" // something weird with CSS here - shouldn't need to set this but i do??
                         to={'/members/swap'}
                         state={{
                             selectedDate: getISOStringLocalTZ(
@@ -170,7 +170,7 @@ function SwapView({ info }) {
 
 function Swap({ swapInfo }) {
     return (
-        <div className="rounded-2xl border bg-white">
+        <div className="rounded-2xl border bg-white shadow">
             <SwapView info={swapInfo} />
         </div>
     )
