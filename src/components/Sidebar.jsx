@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
+import { useLocation } from 'react-router-dom'
 
 function SidebarLink({ text, path, onClick }) {
+    const { pathname } = useLocation()
+    const selected = path == pathname ? 'bg-red-700 ' : ''
+
     return (
         <Link className="border-red-700 capitalize" to={path} onClick={onClick}>
-            <div className="cursor-pointer px-4 py-2 text-white  active:bg-red-700">
+            <div
+                className={`cursor-pointer px-4 py-2 text-white  active:bg-red-700 ${selected}`}
+            >
                 {text}
             </div>
         </Link>
