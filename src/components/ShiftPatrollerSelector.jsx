@@ -7,6 +7,7 @@ function ShiftPatrollerSelector({
     label,
     selectedValue,
     patrollerOptions,
+    disabled,
 }) {
     const { roster } = useRoster()
 
@@ -50,6 +51,7 @@ function ShiftPatrollerSelector({
             <select
                 id="to-select"
                 className="flex-1"
+                disabled={disabled}
                 value={selectedValue ? selectedValue : ''}
                 onChange={(e) => {
                     onChange(e.target.value)

@@ -22,13 +22,14 @@ function getFromPatrollerOptions(schedule, date, shift) {
 function SwapForm({
     defaultDate = '',
     defaultShift = null,
-    from_team,
-    from_letter,
+    defaultFromTeamAndLetter = null,
 }) {
     const { schedule } = useSchedule()
     const [datePickerValue, setDatePickerValue] = useState(defaultDate)
     const [shiftPickerValue, setShiftPickerValue] = useState(defaultShift)
-    const [fromLetterPickerValue, setFromLetterPickerValue] = useState(null)
+    const [fromLetterPickerValue, setFromLetterPickerValue] = useState(
+        defaultFromTeamAndLetter
+    )
     const [toLetterPickerValue, setToLetterPickerValue] = useState(null)
 
     const [shiftPickerOptions, setShiftPickerOptions] = useState([])
@@ -178,6 +179,7 @@ function SwapForm({
                             datePickerValue,
                             shiftPickerValue
                         )}
+                        disabled={defaultFromTeamAndLetter}
                     />
                 )}
                 {datePickerValue && shiftPickerValue && (
@@ -229,6 +231,9 @@ function CreateEditSwap() {
                 <SwapForm
                     defaultDate={state?.selectedDate || ''}
                     defaultShift={state?.selectedShift || null}
+                    defaultFromTeamAndLetter={
+                        state?.selectedTeamAndLetter || null
+                    }
                 />
             </div>
         </div>

@@ -128,6 +128,7 @@ function SwapView({ info }) {
                                 info.shiftInfo.date
                             ),
                             selectedShift: info.shiftInfo.shift,
+                            selectedTeamAndLetter: `${info.fromPatroller.team}${info.fromPatroller.letter}`,
                         }}
                     >
                         <PatrollerSwap />
