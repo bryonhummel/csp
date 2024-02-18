@@ -15,12 +15,14 @@ function getShiftOptions(schedule, date) {
 
 // From:
 function getFromPatrollerOptions(schedule, date, shift) {
+    // TODO ... should prune out invalid options from the from list
     let scheduledShifts = schedule?.[date] || {}
     return scheduledShifts?.[shift] || {}
 }
 
 // To:
 function getToPatrollerOptions(roster) {
+    // TODO ... should prune out invalid options from the to list
     return roster
 }
 
@@ -237,13 +239,20 @@ function SwapForm({
                         Submit
                     </button>
                 </div>
-                <button
-                    onClick={handleDelete}
-                    value="Delete"
-                    className="rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
-                >
-                    Delete [TODO:Placeholder]
-                </button>
+                {
+                    /* only show this delete button when selected specifically from swaps list (all fields set) */
+                    defaultDate != '' &&
+                        defaultShift &&
+                        defaultFromTeamAndLetter && (
+                            <button
+                                onClick={handleDelete}
+                                value="Delete"
+                                className="rounded bg-red-600 px-2 py-1 text-white hover:cursor-pointer active:bg-red-700"
+                            >
+                                Delete
+                            </button>
+                        )
+                }
             </form>
             {errorMsg}
         </div>
