@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRoster } from '../hooks/useRoster'
-import { useSchedule } from '../hooks/useSchedule'
+import { useSchedule, getSwapIfExist } from '../hooks/useSchedule'
 import { useState } from 'react'
 import RosterPatrollerSelector from '../components/RosterPatrollerSelector'
 import ShiftPatrollerSelector from '../components/ShiftPatrollerSelector'
@@ -19,12 +19,18 @@ function getFromPatrollerOptions(schedule, date, shift) {
     return scheduledShifts?.[shift] || {}
 }
 
+// To:
+function getToPatrollerOptions(roster) {
+    return roster
+}
+
 function SwapForm({
     defaultDate = '',
     defaultShift = null,
     defaultFromTeamAndLetter = null,
 }) {
-    const { schedule } = useSchedule()
+    const { schedule, swaps } = useSchedule()
+    const { roster } = useRoster()
     const [datePickerValue, setDatePickerValue] = useState(defaultDate)
     const [shiftPickerValue, setShiftPickerValue] = useState(defaultShift)
     const [fromLetterPickerValue, setFromLetterPickerValue] = useState(
@@ -44,6 +50,27 @@ function SwapForm({
         setShiftPickerValue(defaultShift)
         setShiftPickerOptions(options)
     }, [datePickerValue, schedule])
+
+    useEffect(() => {
+        if (datePickerValue && shiftPickerValue && fromLetterPickerValue) {
+            const [team, letter] = fromLetterPickerValue.split('')
+            const swap = getSwapIfExist(
+                swaps,
+                datePickerValue,
+                shiftPickerValue,
+                team,
+                letter
+            )
+
+            if (swap?.to_letter && swap?.to_team_number) {
+                setToLetterPickerValue(
+                    `${swap.to_team_number}${swap.to_letter}`
+                )
+            } else {
+                setToLetterPickerValue(null)
+            }
+        }
+    }, [datePickerValue, shiftPickerValue, fromLetterPickerValue, swaps])
 
     console.log(
         `Swap Form State: ${datePickerValue} ${shiftPickerValue} ${fromLetterPickerValue} ${toLetterPickerValue}`
@@ -186,6 +213,8 @@ function SwapForm({
                     <RosterPatrollerSelector
                         label="To:"
                         onChange={setToLetterPickerValue}
+                        patrollerOptions={getToPatrollerOptions(roster)}
+                        selectedValue={toLetterPickerValue}
                     />
                 )}
                 <span className="validity"></span>
@@ -196,7 +225,7 @@ function SwapForm({
                             e.preventDefault()
                             navigate(-1)
                         }}
-                        className="flex-1 rounded border border-red-600 px-2 py-1 hover:cursor-pointer active:bg-red-700 active:text-white"
+                        className="flex-1 rounded border border-red-600 px-2 py-1 text-red-600 hover:cursor-pointer active:bg-red-700 active:text-white"
                     >
                         Cancel
                     </button>

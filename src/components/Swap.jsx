@@ -81,19 +81,31 @@ function SwapView({ info }) {
     function dateDisplay() {
         if (isToday) {
             return (
-                <div className="rounded border border-green-700 bg-green-700  px-4 text-sm font-bold uppercase text-white">
-                    Today
-                </div>
+                <Link
+                    className="cursor-pointer"
+                    to={'/members/schedule'}
+                    state={{ selectedDate: info.shiftInfo.date }}
+                >
+                    <div className="rounded border border-green-700 bg-green-700  px-4 text-sm font-bold uppercase text-white">
+                        Today
+                    </div>
+                </Link>
             )
         } else {
             return (
-                <div className="uppercase">
-                    <span className="font-bold">{dayOfWeek}</span>
-                    <span className="px-2 text-gray-300 ">|</span>
-                    <span>
-                        {month} {date}
-                    </span>
-                </div>
+                <Link
+                    className="cursor-pointer"
+                    to={'/members/schedule'}
+                    state={{ selectedDate: info.shiftInfo.date }}
+                >
+                    <div className="uppercase">
+                        <span className="font-bold">{dayOfWeek}</span>
+                        <span className="px-2 text-gray-300 ">|</span>
+                        <span>
+                            {month} {date}
+                        </span>
+                    </div>
+                </Link>
             )
         }
     }
@@ -114,10 +126,22 @@ function SwapView({ info }) {
                     isFrom={true}
                 />
                 {info.toPatroller && (
-                    <PatrollerNameBadge
-                        patroller={info.toPatroller}
-                        isFrom={false}
-                    />
+                    <Link
+                        className="flex-1 "
+                        to={'/members/swap'}
+                        state={{
+                            selectedDate: getISOStringLocalTZ(
+                                info.shiftInfo.date
+                            ),
+                            selectedShift: info.shiftInfo.shift,
+                            selectedTeamAndLetter: `${info.fromPatroller.team}${info.fromPatroller.letter}`,
+                        }}
+                    >
+                        <PatrollerNameBadge
+                            patroller={info.toPatroller}
+                            isFrom={false}
+                        />
+                    </Link>
                 )}
                 {!info.toPatroller && (
                     <Link
