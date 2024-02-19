@@ -109,10 +109,10 @@ function MemberInfo({ info, letter }) {
                 <span className="flex-1">{letter}</span>
             </div>
             <div className="flex-1">
-                <div>
+                <div className="font-semibold">
                     {info.first_name} {info.last_name}
                 </div>
-                <div className="text-gray-300">{info.csp_id}</div>
+                <div className="text-gray-400">ID: {info.csp_id}</div>
             </div>
             <MailButton email={info.email} />
             <SmsButton sms={info.cell} />
