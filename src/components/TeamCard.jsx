@@ -112,7 +112,7 @@ function MemberInfo({ info, letter }) {
                 <div>
                     {info.first_name} {info.last_name}
                 </div>
-                <div className="text-gray-400">{info.csp_id}</div>
+                <div className="text-gray-300">{info.csp_id}</div>
             </div>
             <MailButton email={info.email} />
             <SmsButton sms={info.cell} />
