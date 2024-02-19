@@ -8,8 +8,14 @@ function parseRoster(sqlData) {
         const team_number = row.team_number || null
         const team_letter = row.team_letter || null
 
-        // first account for assigned volunteer teams (exclude 6, we handle that later since they don't have letters)
-        if (team_number != null && team_letter != null && team_number != 6) {
+        // Assumes
+        // Team 1-5 (volunteer) as normal
+        // Team 6 == Weekday (if they are not assigned to a volunteer team)
+        // If someone does both weekday and volunteer, their name is in volunteer schedule/team/letter list only
+        // If they only do weekday then they are in team 6
+        // Team 7 == Unassigned
+        // Exec (PL/APL) who are not on a team, are on team 7
+        if (team_number != null && team_letter != null) {
             rosterData[team_number] = rosterData[team_number] || {}
             rosterData[team_number][team_letter] = {
                 csp_id: row.csp_id,
@@ -19,34 +25,6 @@ function parseRoster(sqlData) {
                 first_name: row.first_name,
                 last_name: row.last_name,
             }
-        } else if (team_number === null && !row.weekday) {
-            // if no team is assigned use 0 as a placeholder list of unrostered patrollers
-            if (!('0' in rosterData)) {
-                rosterData['0'] = []
-            }
-            rosterData['0'].push({
-                csp_id: row.csp_id,
-                uuid: row.id,
-                email: row.email,
-                cell: row.cell,
-                first_name: row.first_name,
-                last_name: row.last_name,
-            })
-        }
-
-        // if they aren't only on team 6 (weekday) make sure we add them to the list
-        if (row.team_number === 6 || row.weekday) {
-            if (!('6' in rosterData)) {
-                rosterData['6'] = []
-            }
-            rosterData['6'].push({
-                csp_id: row.csp_id,
-                uuid: row.id,
-                email: row.email,
-                cell: row.cell,
-                first_name: row.first_name,
-                last_name: row.last_name,
-            })
         }
 
         // add whoever is flagged as PL/APL to the exec list

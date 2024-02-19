@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useRoster } from '../hooks/useRoster'
-import { TEAM_PRINT_ORDER, MEMBER_PRINT_ORDER } from '../utils/schedUtils'
+import {
+    SWAPABLE_TEAM_PRINT_ORDER,
+    MEMBER_PRINT_ORDER,
+} from '../utils/schedUtils'
 
 function RosterPatrollerSelector({
     onChange,
@@ -15,7 +18,7 @@ function RosterPatrollerSelector({
         </option>
     )
 
-    TEAM_PRINT_ORDER.map((t) => {
+    SWAPABLE_TEAM_PRINT_ORDER.map((t) => {
         if (!patrollerOptions[t]) return null
         MEMBER_PRINT_ORDER.map((m) => {
             if (!patrollerOptions[t][m]) return null

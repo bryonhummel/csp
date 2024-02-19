@@ -3,7 +3,7 @@ import TeamCard from '../components/TeamCard'
 import { useRoster } from '../hooks/useRoster'
 import { useLocation } from 'react-router-dom'
 
-const teamPrintOrder = ['1', '2', '3', '4', '5', '6', 'exec', '0']
+const teamPrintOrder = ['exec', '1', '2', '3', '4', '5', '6', '7']
 const teamToDayMap = {
     1: 'monday',
     2: 'tuesday',
@@ -12,7 +12,7 @@ const teamToDayMap = {
     5: 'friday',
     6: 'weekday',
     exec: '-',
-    0: 'unassigned',
+    7: 'unassigned',
 }
 
 function Roster() {

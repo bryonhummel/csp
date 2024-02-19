@@ -59,7 +59,9 @@ export const SHIFT_STRING_MAP = {
     '630-9': '18:30 - 21:00',
 }
 
-export const TEAM_PRINT_ORDER = ['1', '2', '3', '4', '5', '6', 'exec', '0']
+export const TEAM_PRINT_ORDER = ['1', '2', '3', '4', '5', '6', 'exec', '7']
+// hack - don't show pseudo-exec team in swap list - they appear in other real teams (7 if unassigned)
+export const SWAPABLE_TEAM_PRINT_ORDER = ['1', '2', '3', '4', '5', '6', '7']
 
 export const MEMBER_PRINT_ORDER = [
     'a',
@@ -73,15 +75,6 @@ export const MEMBER_PRINT_ORDER = [
     'i',
     'j',
     's', // spare
-    '1', // daytime numbers
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
     'pl', // used in exec printing only - Patrol Leader
     'apl', // used in exec printing only - Assistant Patrol Leader
 ]
