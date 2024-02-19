@@ -131,15 +131,6 @@ let isArray = function (a) {
 function TeamCard({ teamNumber, teamDay, memberInfo, expand = false }) {
     const [expanded, setExpanded] = useState(expand)
 
-    // override the display of some of the special teams
-    if (teamNumber == 'exec') {
-        teamNumber = '-'
-        teamDay = 'Executive'
-    } else if (teamNumber == '0') {
-        teamNumber = '-'
-        teamDay = 'Unassigned'
-    }
-
     const toggle = () => {
         setExpanded(!expanded)
     }
@@ -150,11 +141,23 @@ function TeamCard({ teamNumber, teamDay, memberInfo, expand = false }) {
                 className="my-4 grid cursor-pointer grid-cols-2"
                 onClick={toggle}
             >
-                <span className="text-right font-bold">Team {teamNumber}</span>
-                <span>
-                    <span className="mx-1 text-gray-200">|</span>
-                    <span className="capitalize">{teamDay}</span>
-                </span>
+                {teamNumber == 'exec' && (
+                    <span className="col-span-2 text-center font-bold">
+                        Executive Team
+                    </span>
+                )}
+
+                {teamNumber != 'exec' && (
+                    <span className="text-right font-bold">
+                        Team {teamNumber}
+                    </span>
+                )}
+                {teamNumber != 'exec' && (
+                    <span>
+                        <span className="mx-1 text-gray-200">|</span>
+                        <span className="capitalize">{teamDay}</span>
+                    </span>
+                )}
             </div>
             {expanded && (
                 <ul className="divide-y">
